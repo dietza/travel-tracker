@@ -1,9 +1,9 @@
 let fetchApi = {
 
-  fetchCurrentTravelerData(userID) {
-    let fetchedCurrentTravelerData = fetch('http://localhost:3001/api/v1/travelers/${userID}')
+  fetchCurrentTravelerData(travelerID) {
+    let fetchedCurrentTravelerData = fetch('http://localhost:3001/api/v1/travelers/${travelerID}')
       .then(response => response.json())
-      .then(data => data.travelers.find(traveler => traveler.id === userID))
+      .then(data => data.travelers.find(traveler => traveler.id === travelerID))
       .catch(error => console.log(error.message));
     return fetchedCurrentTravelerData;
   },

@@ -10,25 +10,25 @@
     <h1>EarthBound Travels</h1>
 
 
-    
+
     <nav role="navigation" tabindex="0">
       <form class="trip-request-form">
         <h2>WHERE WOULD YOU LIKE TO EXPLORE?</h2>
 
         <label for="form__date-selection" class="label-text">DEPARTURE DATE</label><br>
-        <input type="date" class="form__date-input" id="date-input" name="form__date-selection" aria-label="input-to-select-departure-date-for-trip-request">
+        <input type="date" class="form__date-input" id="date-input" name="form__date-selection" aria-label="input to select departure date for trip request" aria-required="true">
         <br>
 
         <label for="form__trip-duration-input" class="label-text">LENGTH OF TRIP</label><br>
-        <input type="number" min="1" step="1" class="form__duration-input" id="duration-input" name="form__trip-duration-input" aria-label="input-to-select-duration-for-trip-request" placeholder="how many days?">
+        <input type="number" min="1" step="1" class="form__duration-input" id="duration-input" name="form__trip-duration-input" aria-label="input to select duration for trip request" aria-required="true" placeholder="how many days?">
         <br>
 
         <label for="form__num-travelers-input" class="label-text">NUMBER OF TRAVELERS</label><br>
-        <input type="number" min="1" step="1" class="form__travelers-input" id="num-travelers-input" name="form__num-travelers-input" aria-label="input-to-select-number-of-travelers-for-trip-request" placeholder="how many travelers?">
+        <input type="number" min="1" step="1" class="form__travelers-input" id="num-travelers-input" name="form__num-travelers-input" aria-label="input to select number of travelers for trip request" aria-required="true" placeholder="how many travelers?">
         <br>
 
         <label for="form__trip-destination" class="label-text">DESTINATION</label><br>
-        <input type="type" list="destination-options" class="form-destination" id="form-destination" name="form__trip-destination" aria-label="input-to-select-destination-for-trip-request" placeholder="where to?">
+        <input type="type" list="destination-options" class="form-destination" id="form-destination" name="form__trip-destination" aria-label="input to select destination for trip request" aria-required="true" placeholder="where to?">
         <br>
 
 
@@ -39,7 +39,7 @@
         </datalist>
 
 
-        <button class="estimate-trip-button">View Trip Estimate</button>
+        <button class="estimate-trip-button" aria-label="view cost estimate for requested trip details">View Trip Estimate</button>
       </form>
     </nav>
 

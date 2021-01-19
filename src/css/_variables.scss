@@ -7,6 +7,14 @@ $black: #000000ce;
 $cool-grey:	#327577;
 $seafoam:	#19d3ca;
 
+// MIXINS
+
+@mixin display-grid($columns, $rows) {
+  display: grid;
+  grid-template-columns: $columns;
+  grid-template-rows: $rows;
+};
+
 @mixin primary-background() {
   background: linear-gradient(to top, rgba(81, 117, 115, 0.75), rgba(0, 0, 0, 0.5)), url(https://www.nasa.gov/sites/default/files/thumbnails/image/iss061e098033_lrg.jpg);
   background-position: center;
@@ -43,23 +51,9 @@ $seafoam:	#19d3ca;
   margin: 1rem;
 }
 
-// button {
-//   font-weight: 300;
-//   font-stretch: normal;
-//   font-size: 1rem;
-//   font-family: $font;
-//   color: $white;
-//   background-color: $black;
-//   border: .5px solid $white;
-//   border-radius: 3%;
-//   padding: .5rem;
-//   margin: 1rem;
-//   cursor: crosshair;
+input{
 
-//   &:focus {
-//     background-color: $cool-grey;
-//   }
-// }
+}
 
 .hidden {
   display: none;

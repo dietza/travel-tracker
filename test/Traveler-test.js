@@ -4,12 +4,12 @@ const expect = chai.expect;
 import Traveler from '../src/OOP/Traveler';
 
 describe('Traveler', () => {
-  let travelerData;
+  let allTravelersData;
   let traveler1;
   let traveler2;
   
   beforeEach(() => {
-    travelerData = [{
+    allTravelersData = [{
       "id": 1,
       "name": "Ham Leadbeater",
       "travelerType": "relaxer",
@@ -20,8 +20,8 @@ describe('Traveler', () => {
       "travelerType": "thrill-seeker"
     }]
 
-    traveler1 = new Traveler(travelerData[0]);
-    traveler2 = new Traveler(travelerData[1]);
+    traveler1 = new Traveler(allTravelersData[0]);
+    traveler2 = new Traveler(allTravelersData[1]);
   })
 
   it('should be an single traveler', () => {

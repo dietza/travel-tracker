@@ -10,7 +10,39 @@
 body {
   // display: grid;
   @include primary-background;
-  @include heading-text;
-
+  @include border($seafoam);
+  // @include heading-text;
+  // @extend button;
+  
 }
 
+
+h1 {
+  @include heading-text(4rem, normal, 600, $white);
+}
+
+h2 {
+  @include heading-text(1.85rem, normal, 500, $white);
+}
+
+label {
+  @include label-text(1.35rem, 300, $white);
+}
+
+button {
+  font-weight: 300;
+  font-stretch: normal;
+  font-size: 1rem;
+  font-family: $font;
+  color: $white;
+  background-color: $black;
+  border: .5px solid $white;
+  border-radius: 3%;
+  padding: .5rem;
+  margin: 1rem;
+  cursor: crosshair;
+
+  &:focus {
+    background-color: $cool-grey;
+  }
+}

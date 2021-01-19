@@ -8,7 +8,7 @@ $cool-grey:	#327577;
 $seafoam:	#19d3ca;
 
 @mixin primary-background() {
-  background: url(https://www.nasa.gov/sites/default/files/thumbnails/image/iss061e098033_lrg.jpg);
+  background: linear-gradient(to top, rgba(81, 117, 115, 0.75), rgba(0, 0, 0, 0.5)), url(https://www.nasa.gov/sites/default/files/thumbnails/image/iss061e098033_lrg.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -16,16 +16,50 @@ $seafoam:	#19d3ca;
   width: 100vh;
 }
 
-@mixin heading-text() {
+@mixin heading-text($font-size, $font-style, $font-weight, $color) {
   font-family: $font;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 2.5rem;
+  font-style: $font-style;
+  font-weight: $font-weight;
+  font-size: $font-size;
   text-align: center;
-  color: $white;
+  color: $color;
   margin: .5rem;
   border-color: $seafoam;
 }
+
+@mixin border($border-color) {
+    border: .5px solid $border-color;
+    border-radius: 3%;
+    padding: 1rem;
+    margin: 1.5rem;
+}
+
+@mixin label-text($font-size, $font-weight, $color) {
+  font-family: $font;
+  color: $color;
+  font-size: $font-size;
+  font-weight: $font-weight;
+  text-align: center;
+  margin: 1rem;
+}
+
+// button {
+//   font-weight: 300;
+//   font-stretch: normal;
+//   font-size: 1rem;
+//   font-family: $font;
+//   color: $white;
+//   background-color: $black;
+//   border: .5px solid $white;
+//   border-radius: 3%;
+//   padding: .5rem;
+//   margin: 1rem;
+//   cursor: crosshair;
+
+//   &:focus {
+//     background-color: $cool-grey;
+//   }
+// }
 
 .hidden {
   display: none;

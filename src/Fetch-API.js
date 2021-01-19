@@ -50,7 +50,14 @@ let fetchApi = {
     })
       .then(response => response.json())
       .catch(error => console.log(error.message))
-  }
+  },
+
+  // displayErrorMessage(message) {
+  //   const messages = document.querySelector('.messages');
+  //   messages.innerText = message;
+  //   ///// add messages section to HTML where this will display the error message
+  //   ///// move this display to call from DOM-updates
+  // }
 
 }
 

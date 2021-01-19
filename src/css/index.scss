@@ -1,32 +1,87 @@
-/* This is an example of using Sass, otherwise plain CSS works too*/
-// $primary-background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
-// ;
-
 @import "variables";
 @import "login-styles";
 @import "traveler-dashboard-styles";
 @import "media-queries";
 
-body {
-  // display: grid;
-  @include primary-background;
-  @include border($seafoam);
-  // @include heading-text;
-  // @extend button;
-  
+* {
+  text-align: center;
+  margin: 0;
+  font-family: $font;
 }
 
+.wrapper {
+  @include display-grid(40% 60%);
+  grid-gap: 10px;
+  grid-template-areas:
+  "header  header  header"
+  "sidebar main main"
+  "footer  footer  footer";
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  @include primary-background;
+  @include border($seafoam, 1rem);
+  justify-items: center;
+  overflow: scroll;
+}
+
+header {
+  grid-area: header;
+  @include border($seafoam, 1rem);
+  margin-right: 50px;
+}
+
+footer {
+  grid-area: footer;
+  @include border($seafoam, 1rem);
+  margin-right: 50px;
+}
+
+main {
+  grid-area: main;
+  // position: relative;
+  @include border($seafoam, 1rem);
+  margin-right: 50px;
+  overflow: scroll;
+}
+
+form {
+  grid-area: sidebar;
+  @include border($seafoam, 1rem);
+}
 
 h1 {
-  @include heading-text(4rem, normal, 600, $white);
+  @include heading-text(4rem, normal, 700, $white);
+  grid-area: header;
 }
 
 h2 {
-  @include heading-text(1.85rem, normal, 500, $white);
+  @include heading-text(1.85rem, normal, 600, $white);
+  margin: 1.35rem;
+}
+
+h3 {
+  @include heading-text(1.25rem, normal, 400, $white);
+}
+
+p {
+  @include label-text(1.15rem, 300, $white);
 }
 
 label {
-  @include label-text(1.35rem, 300, $white);
+  @include label-text(1.35rem, 400, $white);
+}
+
+input {
+  width: 10rem;
+  height: 1.5rem;
+  text-align: center;
+  color: grey;
+  margin: .75rem;
+
+  @include round-corners(.45rem);
 }
 
 button {
@@ -35,14 +90,23 @@ button {
   font-size: 1rem;
   font-family: $font;
   color: $white;
-  background-color: $black;
-  border: .5px solid $white;
-  border-radius: 3%;
   padding: .5rem;
   margin: 1rem;
-  cursor: crosshair;
 
+  @include transparency($black, .75);
+  @include border($seafoam, .5rem);
+
+  cursor: crosshair;
   &:focus {
     background-color: $cool-grey;
   }
+}
+
+
+
+
+
+
+.hidden {
+  display: none;
 }

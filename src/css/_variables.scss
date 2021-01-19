@@ -1,7 +1,9 @@
 // FONTS
+
 $font: 'Raleway', sans-serif;
 
 // COLORS
+
 $white: #ffffff;
 $black: #000000ce;
 $cool-grey:	#327577;
@@ -9,10 +11,14 @@ $seafoam:	#19d3ca;
 
 // MIXINS
 
-@mixin display-grid($columns, $rows) {
+@mixin display-grid($columns) {
   display: grid;
+  grid-gap: 10px;
   grid-template-columns: $columns;
-  grid-template-rows: $rows;
+  grid-template-areas:
+  "header  header  header"
+  "sidebar content content"
+  "footer  footer  footer";
 };
 
 @mixin primary-background() {
@@ -20,8 +26,8 @@ $seafoam:	#19d3ca;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
-  width: 100vh;
+  height: auto;
+  width: auto;
 }
 
 @mixin heading-text($font-size, $font-style, $font-weight, $color) {
@@ -32,14 +38,6 @@ $seafoam:	#19d3ca;
   text-align: center;
   color: $color;
   margin: .5rem;
-  border-color: $seafoam;
-}
-
-@mixin border($border-color) {
-    border: .5px solid $border-color;
-    border-radius: 3%;
-    padding: 1rem;
-    margin: 1.5rem;
 }
 
 @mixin label-text($font-size, $font-weight, $color) {
@@ -51,10 +49,23 @@ $seafoam:	#19d3ca;
   margin: 1rem;
 }
 
-input{
+@mixin border($border-color, $border-radius) {
+  border: .5px solid $border-color;
+  padding: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
 
+  @include round-corners($border-radius);
 }
 
-.hidden {
-  display: none;
+@mixin round-corners($border-radius) {
+  border-radius: $border-radius;
+}
+
+@mixin transparency($color, $opacity) {
+  @if $color == $black {
+    background-color: rgba(0, 0, 0, $opacity);
+  }
 }

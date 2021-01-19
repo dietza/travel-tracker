@@ -1,6 +1,6 @@
 class TripsRepository {
   constructor(allTripsData) {
-    this.allTrips = allTripsData;
+    this.allTrips = allTripsData || [];
   }
 
   // method to  filter trips (by traveler id) from fetched data

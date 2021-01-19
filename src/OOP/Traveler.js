@@ -3,7 +3,7 @@ class Traveler {
     this.id = currentTravelerData.id;
     this.name = currentTravelerData.name;
     this.travelerType = currentTravelerData.travelerType;
-    this.myTrips = [];
+    // this.myTrips = [];
   }
 }
 

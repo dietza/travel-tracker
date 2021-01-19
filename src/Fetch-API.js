@@ -33,8 +33,7 @@ let fetchApi = {
   },
 
   postNewTrip(tripRequest, tripDate) {
-    // let newBooking = fetchApi.createBooking(booking);
-    let postTripData = fetch('http://localhost:3001/api/v1/trips', {
+    fetch('http://localhost:3001/api/v1/trips', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"

@@ -25,7 +25,7 @@ describe('Traveler', () => {
   })
 
   it('should be an single traveler', () => {
-    expect(traveler1).to.be.an.instanceOf(Traveler);
+    expect(traveler2).to.be.an.instanceOf(Traveler);
     expect(traveler1).to.deep.equal({
       "id": 1,
       "name": "Ham Leadbeater",
@@ -33,5 +33,22 @@ describe('Traveler', () => {
     });
   })
 
+  it('should have an id', () => {
+    expect(traveler1.id).to.be.a("number");
+    expect(traveler1.id).to.equal(1);
+    expect(traveler2.id).to.equal(2);
+  })
+
+  it('should have a name', () => {
+    expect(traveler2.name).to.be.a("string");
+    expect(traveler1.name).to.equal("Ham Leadbeater");
+    expect(traveler2.name).to.equal("Rachael Vaughten");
+  })
+
+  it('should have a traveler type', () => {
+    expect(traveler1.travelerType).to.be.a("string");
+    expect(traveler1.travelerType).to.equal("relaxer");
+    expect(traveler2.travelerType).to.equal("thrill-seeker");
+  })
 
 });

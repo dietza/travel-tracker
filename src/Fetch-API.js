@@ -1,9 +1,9 @@
 let fetchApi = {
 
-  fetchCurrentTravelerData(userID) {
-    let fetchedCurrentTravelerData = fetch('http://localhost:3001/api/v1/travelers/${userID}')
+  fetchCurrentTravelerData(travelerID) {
+    let fetchedCurrentTravelerData = fetch('http://localhost:3001/api/v1/travelers/${travelerID}')
       .then(response => response.json())
-      .then(data => data.travelers.find(traveler => traveler.id === userID))
+      .then(data => data.travelers.find(traveler => traveler.id === travelerID))
       .catch(error => console.log(error.message));
     return fetchedCurrentTravelerData;
   },
@@ -50,7 +50,14 @@ let fetchApi = {
     })
       .then(response => response.json())
       .catch(error => console.log(error.message))
-  }
+  },
+
+  // displayErrorMessage(message) {
+  //   const messages = document.querySelector('.messages');
+  //   messages.innerText = message;
+  //   ///// add messages section to HTML where this will display the error message
+  //   ///// move this display to call from DOM-updates
+  // }
 
 }
 

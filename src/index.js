@@ -9,7 +9,7 @@ import './css/index.scss';
 
 
 import Traveler from './OOP/Traveler';
-import TravelersRepository from './OOP/TravelersRepository';
+// import TravelersRepository from './OOP/TravelersRepository';
 import TripsRepository from './OOP/TripsRepository';
 import DestinationsRepository from './OOP/DestinationsRepository'
 

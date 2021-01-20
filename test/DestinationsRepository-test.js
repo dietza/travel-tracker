@@ -166,9 +166,12 @@ describe('DestinationsRepository', () => {
     const requestedTrip3 = requestedTripsData[1];
     const requestedTrip138 = requestedTripsData[2];
 
-    const trip2Estimate = destinationsRepository.calculateTripEstimate(requestedTrip2);
-    const trip3Estimate = destinationsRepository.calculateTripEstimate(requestedTrip3);
-    const trip138Estimate = destinationsRepository.calculateTripEstimate(requestedTrip138);
+    const trip2Estimate = destinationsRepository.calculateTripEstimate
+    (requestedTrip2);
+    const trip3Estimate = destinationsRepository.calculateTripEstimate
+    (requestedTrip3);
+    const trip138Estimate = destinationsRepository.calculateTripEstimate
+    (requestedTrip138);
 
     expect(trip2Estimate).to.equal(16750);
     expect(trip3Estimate).to.equal(8720);
@@ -183,9 +186,12 @@ describe('DestinationsRepository', () => {
     const requestedTripZZ = 
     {"destinationID": 22, "travelers": 3};
 
-    const tripXEstimate = destinationsRepository.calculateTripEstimate(requestedTripXX);
-    const tripYEstimate = destinationsRepository.calculateTripEstimate(requestedTripYY);
-    const tripZEstimate = destinationsRepository.calculateTripEstimate(requestedTripZZ);
+    const tripXEstimate = destinationsRepository.calculateTripEstimate
+    (requestedTripXX);
+    const tripYEstimate = destinationsRepository.calculateTripEstimate
+    (requestedTripYY);
+    const tripZEstimate = destinationsRepository.calculateTripEstimate
+    (requestedTripZZ);
 
     expect(tripXEstimate).to.equal('Missing info: Where are we going?');
     expect(tripYEstimate).to.equal

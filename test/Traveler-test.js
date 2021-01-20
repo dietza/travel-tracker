@@ -3,6 +3,7 @@ const expect = chai.expect;
 
 import Traveler from '../src/OOP/Traveler';
 
+
 describe('Traveler', () => {
   let allTravelersData;
   let traveler1;

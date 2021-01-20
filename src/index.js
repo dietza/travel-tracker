@@ -7,6 +7,7 @@ import './css/index.scss';
 // An example of how you tell webpack to use an image
 ///// (also need to link to it in the index.html)
 
+import moment from 'moment';
 
 import Traveler from './OOP/Traveler';
 // import TravelersRepository from './OOP/TravelersRepository';

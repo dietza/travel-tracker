@@ -7,7 +7,6 @@ class TripsRepository {
     const travelerTrips = this.allTrips.filter(trip => {
       return trip.userID === travelerID;
     });
-
     return travelerTrips;
   }
 
@@ -17,7 +16,6 @@ class TripsRepository {
     });
     return tripByID;
   }
-
 
   filterPastYear(travelerID, currentDate, yearAgoDate) {
     const allTravelerTrips = this.filterByTravelerID(travelerID);
@@ -30,7 +28,6 @@ class TripsRepository {
 
     return pastYearTrips;
   }
-
 
   calculateYearlyTotal(travelerID, currentDate, yearAgoDate, destinationsRepo) {
     const pastYearTrips = 

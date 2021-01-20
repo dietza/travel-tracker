@@ -11,6 +11,13 @@ class TripsRepository {
     return travelerTrips;
   }
 
+  findByTripID(tripID) {
+    const tripByID = this.allTrips.find(trip => {
+      return trip.id === tripID;
+    });
+    return tripByID;
+  }
+
   calculateTravelerYearTotal() {
     // const yearlyTotalCost
   }

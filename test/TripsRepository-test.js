@@ -1,5 +1,6 @@
 import chai from 'chai';
 const expect = chai.expect;
+import moment from 'moment';
 
 import TripsRepository from '../src/OOP/TripsRepository';
 import DestinationsRepository from '../src/OOP/DestinationsRepository';
@@ -120,6 +121,7 @@ describe('TripsRepository', () => {
   let traveler25;
   let destinationsRepository;
   let tripsRepository;
+  let today;
   
   beforeEach(() => {
 
@@ -128,7 +130,10 @@ describe('TripsRepository', () => {
 
     destinationsRepository = new DestinationsRepository(allDestinationsData);
 
-    tripsRepository = new TripsRepository(allTripsData)
+    tripsRepository = new TripsRepository(allTripsData);
+
+    today = moment().format('YYYY/MM/DD');
+
   });
 
   it('should be an instance of the TripsRepository class', ()=> {
@@ -174,8 +179,9 @@ describe('TripsRepository', () => {
   })
 
   it('should calc total a traveler spent on trips in the past year', () => {
-    // const travelerTotal25 = tripsRepository.calculateTravelerYearTotal();
-    const travelerTotal = tripsRepository.calculateTravelerYearTotal(traveler3.id);
+
+    console.log('MOMENT >>>>> ', moment().format('YYYY/MM/DD'));
+
 
     expect(travelerTotal).to.equal(0);
   })

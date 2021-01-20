@@ -172,7 +172,8 @@ describe('DestinationsRepository', () => {
       "image": "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
       "alt": "people standing inside a colosseum during the day"
     });
-    expect(destinationByName3).to.deep.equal('Sorry, we can\'t get you to XXXX...yet!');
+    expect(destinationByName3).to.deep.equal
+    ("Sorry, we can't get you to Mars ...yet!");
   })
 
 

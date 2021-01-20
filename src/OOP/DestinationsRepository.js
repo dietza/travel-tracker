@@ -4,9 +4,19 @@ class DestinationsRepository {
   }
 
 
-  findByName(destinationName) {
+  findByName(requestDestinationName) {
 
-    
+    const targetDestination = this.allDestinations.find(destination => {
+      return destination.destination.includes(requestDestinationName);
+    });
+
+    if (targetDestination) {
+      return targetDestination;
+    } else {
+      const unavailDestinationMsg = 
+      `Sorry, we can't get you to ${requestDestinationName} ...yet!`;
+      return unavailDestinationMsg;
+    }
 
   }
 

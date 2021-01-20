@@ -254,10 +254,19 @@ describe('TripsRepository', () => {
 
   it('should calc total a traveler spent on trips in the past year', () => {
 
-    console.log('MOMENT >>>>> ', today, typeof today);
-    console.log('FORMATTED >>>>> ', oneYearAgo, typeof oneYearAgo);
+    const yearlyTotalCost3 = tripsRepository.calculateYearlyTotal
+    (traveler3.id, today, oneYearAgo, destinationsRepository);
+    const yearlyTotalCost35 = tripsRepository.calculateYearlyTotal
+    (traveler35.id, today, oneYearAgo, destinationsRepository);
+    const yearlyTotalCost25 = tripsRepository.calculateYearlyTotal
+    (traveler25.id, today, oneYearAgo, destinationsRepository);
 
-    expect(travelerTotal).to.equal(0);
+    // console.log('MOMENT >>>>> ', today, typeof today);
+    // console.log('FORMATTED >>>>> ', oneYearAgo, typeof oneYearAgo);
+
+    expect(yearlyTotalCost3).to.equal(15095);
+    expect(yearlyTotalCost35).to.equal(16750);
+    expect(yearlyTotalCost25).to.equal(0);
   })
 
 })

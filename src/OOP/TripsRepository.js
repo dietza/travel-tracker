@@ -32,8 +32,41 @@ class TripsRepository {
   }
 
 
-  calculateTravelerYearTotal() {
-    // const yearlyTotalCost
+  calculateYearlyTotal(travelerID, currentDate, yearAgoDate, destinationsRepo) {
+    
+    const pastYearTrips = 
+    this.filterPastYear(travelerID, currentDate, yearAgoDate);
+
+    console.log('pastYearTrips >>>>> ', pastYearTrips);
+
+    if (pastYearTrips.length > 0) {
+      const yearlyTotal = pastYearTrips.reduce((sum, trip) => {
+
+        const tripTotal = destinationsRepo.calculateTripEstimate(trip);
+
+        console.log('tripTotal >>>>> ', tripTotal);
+
+        sum += tripTotal
+
+        return sum;
+      }, 0);
+
+      console.log('yearlyTotal >>>>> ', yearlyTotal);
+      return yearlyTotal;
+
+      // let yearlyTotal = 0;
+      // pastYearTrips.forEach(trip => {
+      //   const tripTotal = destinationsRepo.calculateTripEstimate(trip);
+
+      //   console.log('tripTotal >>>>> ', tripTotal);
+      //   yearlyTotal += tripTotal;
+      // })
+
+      // return yearlyTotal;
+    } else {
+      return 0;
+    }
+
   }
 
   // method to  filter trips (by traveler id) from fetched data

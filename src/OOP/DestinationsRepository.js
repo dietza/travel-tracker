@@ -3,11 +3,73 @@ class DestinationsRepository {
     this.allDestinations = allDestinationsData || [];
   }
 
-  // method to search for a single destination by name (based on traveler request input)
+  findByName(requestDestinationName) {
 
-  // method to find single destination by destination id (to display for each of a traveler's trips)
-  
-  // method to calculate cost estimate for a trip (estimates in each destination object * days duration input)
+    const targetDestination = this.allDestinations.find(destination => {
+      return destination.destination.includes(requestDestinationName);
+    });
+
+    if (targetDestination) {
+      return targetDestination;
+    } else {
+      const unavailDestinationMsg = 
+      `Sorry, we can't get you to ${requestDestinationName} ...yet!`;
+      return unavailDestinationMsg;
+    }
+
+  }
+
+  findByID(destinationID) {
+
+    const targetDestination = this.allDestinations.find(destination => {
+      return destination.id === destinationID;
+    });
+
+    if (targetDestination) {
+      return targetDestination;
+    } else {
+      const unknownDestinationMsg = 
+      `Wait..., where are we?`;
+      return unknownDestinationMsg;
+    }
+
+  }
+
+  calculateTripEstimate(requestedTrip) {
+
+    const missingDetails = this.confirmRequestedTripDetails(requestedTrip);
+
+    if (missingDetails) {
+      return missingDetails;
+    }
+
+    const numTravelers = requestedTrip.travelers;
+    const numDays = requestedTrip.duration;
+    const requestDestination = this.findByID(requestedTrip.destinationID);
+
+    const estFlightTotal = 
+    (requestDestination.estimatedFlightCostPerPerson * numTravelers);
+    const estLodgingTotal = 
+    ((requestDestination.estimatedLodgingCostPerDay * numTravelers) * numDays);
+    const estTripTotal = estFlightTotal + estLodgingTotal;
+    
+    return estTripTotal;
+
+  }
+
+  confirmRequestedTripDetails(requestedTrip) {
+
+    const missingInfoMsg = 'Missing info: ';
+
+    if (!requestedTrip.destinationID) {
+      return missingInfoMsg + 'Where are we going?';
+    } else if (!requestedTrip.travelers) {
+      return missingInfoMsg + 'How many people are traveling?';
+    } else if (!requestedTrip.duration) {
+      return missingInfoMsg + 'How long do you want to be there?';
+    }
+
+  }
 
 }
 

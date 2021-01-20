@@ -18,6 +18,20 @@ class TripsRepository {
     return tripByID;
   }
 
+
+  filterPastYear(travelerID, currentDate, yearAgoDate) {
+    const allTravelerTrips = this.filterByTravelerID(travelerID);
+    
+    const pastYearTrips = allTravelerTrips.filter(trip => {
+      if ((yearAgoDate < trip.date) && (trip.date < currentDate)) {
+        return trip;
+      }
+    })
+
+    return pastYearTrips;
+  }
+
+
   calculateTravelerYearTotal() {
     // const yearlyTotalCost
   }

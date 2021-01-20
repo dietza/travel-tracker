@@ -117,6 +117,16 @@ const allTripsData = [
     "duration": 11,
     "status": "approved",
     "suggestedActivities": []
+  },
+  {
+    "id": 189,
+    "userID": 25,
+    "destinationID": 15,
+    "travelers": 4,
+    "date": "2019/12/01",
+    "duration": 10,
+    "status": "approved",
+    "suggestedActivities": []
   }
 ];
 
@@ -124,16 +134,17 @@ describe('TripsRepository', () => {
 
   let traveler3;
   let traveler25;
+  let traveler35;
   let destinationsRepository;
   let tripsRepository;
   let today;
   let oneYearAgo;
-  let formattedYearAgo;
   
   beforeEach(() => {
 
     traveler3 = allTravelersData[0];
     traveler25 = allTravelersData[1];
+    traveler35 = allTravelersData[2];
 
     destinationsRepository = new DestinationsRepository(allDestinationsData);
 
@@ -141,9 +152,7 @@ describe('TripsRepository', () => {
 
     today = moment().format('YYYY/MM/DD');
 
-    oneYearAgo = moment().subtract(366, 'days').calendar();
-
-    formattedYearAgo = moment().subtract(366, 'days').format('YYYY/MM/DD');
+    oneYearAgo = moment().subtract(366, 'days').format('YYYY/MM/DD');
     
   });
 
@@ -185,17 +194,68 @@ describe('TripsRepository', () => {
     const travelerTrips25 = tripsRepository.filterByTravelerID(traveler25.id);
     const travelerTrips3 = tripsRepository.filterByTravelerID(traveler3.id);
 
-    expect(travelerTrips25).to.deep.equal([]);
+    expect(travelerTrips25).to.deep.equal([{
+      "id": 189,
+      "userID": 25,
+      "destinationID": 15,
+      "travelers": 4,
+      "date": "2019/12/01",
+      "duration": 10,
+      "status": "approved",
+      "suggestedActivities": []
+    }]);
     expect(travelerTrips3.length).to.equal(2);
+  })
+
+  it('should filter a traveler\'s trips for the past year', () => {
+    const travelYear3 = tripsRepository.filterPastYear
+    (traveler3.id, today, oneYearAgo);
+    const travelYear35 = tripsRepository.filterPastYear
+    (traveler35.id, today, oneYearAgo);
+    const travelYear25 = tripsRepository.filterPastYear
+    (traveler25.id, today, oneYearAgo);
+
+    expect(travelYear3).to.deep.equal([
+      {
+        "id": 3,
+        "userID": 3,
+        "destinationID": 22,
+        "travelers": 4,
+        "date": "2020/05/22",
+        "duration": 17,
+        "status": "pending",
+        "suggestedActivities": []
+      },
+      {
+        "id": 41,
+        "userID": 3,
+        "destinationID": 25,
+        "travelers": 3,
+        "date": "2020/08/30",
+        "duration": 11,
+        "status": "approved",
+        "suggestedActivities": []
+      }
+    ]);    
+    expect(travelYear35).to.deep.equal([
+      {
+        "id": 2,
+        "userID": 35,
+        "destinationID": 25,
+        "travelers": 5,
+        "date": "2020/10/04",
+        "duration": 18,
+        "status": "pending",
+        "suggestedActivities": []
+      }
+    ]);
+    expect(travelYear25).to.deep.equal([]);
   })
 
   it('should calc total a traveler spent on trips in the past year', () => {
 
     console.log('MOMENT >>>>> ', today, typeof today);
-
-    console.log('ONE YEAR AGO >>>>> ', oneYearAgo, typeof oneYearAgo);
-
-    console.log('FORMATTED YEAR AGO >>>>> ', formattedYearAgo, typeof formattedYearAgo);
+    console.log('FORMATTED >>>>> ', oneYearAgo, typeof oneYearAgo);
 
     expect(travelerTotal).to.equal(0);
   })

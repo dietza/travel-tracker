@@ -16,6 +16,11 @@ const allTravelersData = [
     "id": 25,
     "name": "Leighton Doerrling",
     "travelerType": "relaxer"
+  },
+  {
+    "id": 35,
+    "name": "Lorilyn Frostdick",
+    "travelerType": "shopper"
   }
 ];
 
@@ -122,6 +127,8 @@ describe('TripsRepository', () => {
   let destinationsRepository;
   let tripsRepository;
   let today;
+  let oneYearAgo;
+  let formattedYearAgo;
   
   beforeEach(() => {
 
@@ -134,6 +141,10 @@ describe('TripsRepository', () => {
 
     today = moment().format('YYYY/MM/DD');
 
+    oneYearAgo = moment().subtract(366, 'days').calendar();
+
+    formattedYearAgo = moment().subtract(366, 'days').format('YYYY/MM/DD');
+    
   });
 
   it('should be an instance of the TripsRepository class', ()=> {
@@ -180,8 +191,11 @@ describe('TripsRepository', () => {
 
   it('should calc total a traveler spent on trips in the past year', () => {
 
-    console.log('MOMENT >>>>> ', moment().format('YYYY/MM/DD'));
+    console.log('MOMENT >>>>> ', today, typeof today);
 
+    console.log('ONE YEAR AGO >>>>> ', oneYearAgo, typeof oneYearAgo);
+
+    console.log('FORMATTED YEAR AGO >>>>> ', formattedYearAgo, typeof formattedYearAgo);
 
     expect(travelerTotal).to.equal(0);
   })

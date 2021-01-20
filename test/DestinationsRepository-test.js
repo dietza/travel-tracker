@@ -136,24 +136,45 @@ describe('DestinationsRepository', () => {
     expect(destinationsRepository).to.be.an.instanceof(DestinationsRepository);
   })
 
-  // it('should contain an array of trip data objects', () => {
-  //   expect(tripsRepository.allTrips).to.be.an('array');
-  //   expect(tripsRepository.allTrips[1]).to.deep.equal();
-  // })
+  it('should contain an array of destination data objects', () => {
 
-  // it('should filter trips based on a traveler\'s id number', () => {
-  //   const travelerTrips25 = tripsRepository.filterByTravelerID(traveler25.id);
-  //   const travelerTrips3 = tripsRepository.filterByTravelerID(traveler3.id);
+    const targetDestination = destinationsRepository.allDestinations[(destinationsRepository.allDestinations.length - 1)]
 
-  //   expect(travelerTrips25).to.deep.equal([]);
-  //   expect(travelerTrips3.length).to.equal(2);
-  // })
+    expect(destinationsRepository.allDestinations).to.be.an('array');
+    expect(targetDestination).to.deep.equal({
+      "id": 49,
+      "destination": "Castries, St Lucia",
+      "estimatedLodgingCostPerDay": 650,
+      "estimatedFlightCostPerPerson": 90,
+      "image": "https://images.unsplash.com/photo-1524478075552-c2763ea171b8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1502&q=80",
+      "alt": "aerial photography of rocky mountain under cloudy sky"
+    });
+  })
 
-  // it('should calc total a traveler spent on trips in the past year', () => {
-  //   // const travelerTotal25 = tripsRepository.calculateTravelerYearTotal();
-  //   const travelerTotal = tripsRepository.calculateTravelerYearTotal(traveler3.id);
+  it('should find a destination by name (or just city name)', () => {
+    const destinationByName1 = destinationsRepository.findByName('Lima, Peru');
+    const destinationByName2 = destinationsRepository.findByName('Rome');
+    const destinationByName3 = destinationsRepository.findByName('Mars');
 
-  //   expect(travelerTotal).to.equal(0);
-  // })
+    expect(destinationByName1).to.deep.equal({
+      "id": 1,
+      "destination": "Lima, Peru",
+      "estimatedLodgingCostPerDay": 70,
+      "estimatedFlightCostPerPerson": 400,
+      "image": "https://images.unsplash.com/photo-1489171084589-9b5031ebcf9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80",
+      "alt": "overview of city buildings with a clear sky"
+    });
+    expect(destinationByName2).to.deep.equal({
+      "id": 22,
+      "destination": "Rome, Italy",
+      "estimatedLodgingCostPerDay": 90,
+      "estimatedFlightCostPerPerson": 650,
+      "image": "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
+      "alt": "people standing inside a colosseum during the day"
+    });
+    expect(destinationByName3).to.deep.equal('Sorry, we can\'t get you to XXXX...yet!');
+  })
+
+
 
 })

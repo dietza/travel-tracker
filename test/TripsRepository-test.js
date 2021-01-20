@@ -260,10 +260,7 @@ describe('TripsRepository', () => {
     (traveler35.id, today, oneYearAgo, destinationsRepository);
     const yearlyTotalCost25 = tripsRepository.calculateYearlyTotal
     (traveler25.id, today, oneYearAgo, destinationsRepository);
-
-    // console.log('MOMENT >>>>> ', today, typeof today);
-    // console.log('FORMATTED >>>>> ', oneYearAgo, typeof oneYearAgo);
-
+    
     expect(yearlyTotalCost3).to.equal(15095);
     expect(yearlyTotalCost35).to.equal(16750);
     expect(yearlyTotalCost25).to.equal(0);

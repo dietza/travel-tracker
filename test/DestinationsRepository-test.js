@@ -2,7 +2,6 @@ import chai from 'chai';
 const expect = chai.expect;
 
 import DestinationsRepository from '../src/OOP/DestinationsRepository';
-import TripsRepository from '../src/OOP/TripsRepository';
 
 
 const allDestinationsData = [
@@ -84,13 +83,10 @@ const requestedTripsData = [
 describe('DestinationsRepository', () => {
 
   let destinationsRepository;
-  // let requestedTrips;
   
   beforeEach(() => {
 
     destinationsRepository = new DestinationsRepository(allDestinationsData);
-
-    // requestedTrips = new TripsRepository(requestedTripsData);
 
   });
 
@@ -99,11 +95,11 @@ describe('DestinationsRepository', () => {
   })
 
   it('should contain an array of destination data objects', () => {
-
-    const targetDestination = destinationsRepository.allDestinations[(destinationsRepository.allDestinations.length - 1)]
+    const accessIndex = (destinationsRepository.allDestinations.length - 1);
+    const destination = destinationsRepository.allDestinations[accessIndex];
 
     expect(destinationsRepository.allDestinations).to.be.an('array');
-    expect(targetDestination).to.deep.equal({
+    expect(destination).to.deep.equal({
       "id": 49,
       "destination": "Castries, St Lucia",
       "estimatedLodgingCostPerDay": 650,
@@ -165,20 +161,21 @@ describe('DestinationsRepository', () => {
 
   })
 
-  it('should calculate a cost estimate given the destinationID, based on trip duration and number of travelers', () => {
+  it('should calculate a cost estimate for a requested trip', () => {
 
     const requestedTrip2 = requestedTripsData[0];
-    // const requestedTrip3 = requestedTripsData[1];
+    const requestedTrip3 = requestedTripsData[1];
     const requestedTrip138 = requestedTripsData[2];
 
     const trip2Estimate = destinationsRepository.calculateTripEstimate(requestedTrip2);
-    // const trip3Estimate = destinationsRepository.calculateTripEstimate(requestedTrip3);
+    const trip3Estimate = destinationsRepository.calculateTripEstimate(requestedTrip3);
     const trip138Estimate = destinationsRepository.calculateTripEstimate(requestedTrip138);
 
-    expect(trip2Estimate).to.equal();
-    // expect(trip3Estimate).to.equal();
-    expect(trip138Estimate).to.equal();
+    expect(trip2Estimate).to.equal(16750);
+    expect(trip3Estimate).to.equal(8720);
+    expect(trip138Estimate).to.equal(6810);
 
   })
+
 
 })

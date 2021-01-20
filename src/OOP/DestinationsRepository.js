@@ -35,11 +35,34 @@ class DestinationsRepository {
 
   }
 
-  calculateTripEstimate() {
+  calculateTripEstimate(requestedTrip) {
 
+    // this.confirmRequestedTripDetails(requestedTrip);
+
+    const numTravelers = requestedTrip.travelers;
+    const numDays = requestedTrip.duration;
+    const requestDestination = this.findByID(requestedTrip.destinationID);
+
+    console.log('requestDestination >>>>> ', requestDestination);
+    console.log('requestedTrip.travelers >>>>> ', requestedTrip.travelers);
+    console.log('requestedTrip.duration >>>>> ', requestedTrip.duration);
+
+    const estFlightTotal = 
+    (requestDestination.estimatedFlightCostPerPerson * numTravelers);
+    console.log('estFlightTotal >>>>> ', estFlightTotal);
+
+    const estLodgingTotal = 
+    ((requestDestination.estimatedLodgingCostPerDay * numTravelers) * numDays);
+    console.log('estLodgingTotal >>>>> ', estLodgingTotal);
+
+    const estTripTotal = estFlightTotal + estLodgingTotal;
     
+    console.log('EST TRIP TOTAL>>>>> ', estTripTotal);
+    return estTripTotal;
 
   }
+
+
 
 
 

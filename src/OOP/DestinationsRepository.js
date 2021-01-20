@@ -38,7 +38,6 @@ class DestinationsRepository {
   calculateTripEstimate(requestedTrip) {
 
     const missingDetails = this.confirmRequestedTripDetails(requestedTrip);
-    console.log('missingDetails >>>>> ', missingDetails);
 
     if (missingDetails) {
       return missingDetails;
@@ -48,21 +47,12 @@ class DestinationsRepository {
     const numDays = requestedTrip.duration;
     const requestDestination = this.findByID(requestedTrip.destinationID);
 
-    console.log('requestDestination >>>>> ', requestDestination);
-    console.log('requestedTrip.travelers >>>>> ', requestedTrip.travelers);
-    console.log('requestedTrip.duration >>>>> ', requestedTrip.duration);
-
     const estFlightTotal = 
     (requestDestination.estimatedFlightCostPerPerson * numTravelers);
-    console.log('estFlightTotal >>>>> ', estFlightTotal);
-
     const estLodgingTotal = 
     ((requestDestination.estimatedLodgingCostPerDay * numTravelers) * numDays);
-    console.log('estLodgingTotal >>>>> ', estLodgingTotal);
-
     const estTripTotal = estFlightTotal + estLodgingTotal;
     
-    console.log('EST TRIP TOTAL>>>>> ', estTripTotal);
     return estTripTotal;
 
   }
@@ -80,15 +70,6 @@ class DestinationsRepository {
     }
 
   }
-
-
-
-
-  // method to search for a single destination by name (based on traveler request input)
-
-  // method to find single destination by destination id (to display for each of a traveler's trips)
-  
-  // method to calculate cost estimate for a trip (estimates in each destination object * days duration input)
 
 }
 

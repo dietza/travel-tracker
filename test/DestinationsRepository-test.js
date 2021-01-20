@@ -176,6 +176,31 @@ describe('DestinationsRepository', () => {
     ("Sorry, we can't get you to Mars ...yet!");
   })
 
+  it('should find a destination by destinationID', () => {
+    const destinationID14 = destinationsRepository.allDestinations[1].id;
 
+    const foundByID14 = destinationsRepository.findByID(destinationID14);
+    const foundByID49 = destinationsRepository.findByID(49);
+    const foundByIDxx = destinationsRepository.findByID(99);
+
+    expect(foundByID14).to.deep.equal({
+      "id": 14,
+      "destination": "Marrakesh, Morocco",
+      "estimatedLodgingCostPerDay": 70,
+      "estimatedFlightCostPerPerson": 830,
+      "image": "https://images.unsplash.com/photo-1517821362941-f7f753200fef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1952&q=80",
+      "alt": "people buying oranges and other fruit from a street vendor"
+    });
+    expect(foundByID49).to.deep.equal({
+      "id": 49,
+      "destination": "Castries, St Lucia",
+      "estimatedLodgingCostPerDay": 650,
+      "estimatedFlightCostPerPerson": 90,
+      "image": "https://images.unsplash.com/photo-1524478075552-c2763ea171b8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1502&q=80",
+      "alt": "aerial photography of rocky mountain under cloudy sky"
+    });
+    expect(foundByIDxx).to.deep.equal("Wait..., where are we?");
+
+  })
 
 })

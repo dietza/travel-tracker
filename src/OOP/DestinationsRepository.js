@@ -3,7 +3,6 @@ class DestinationsRepository {
     this.allDestinations = allDestinationsData || [];
   }
 
-
   findByName(requestDestinationName) {
 
     const targetDestination = this.allDestinations.find(destination => {
@@ -19,6 +18,25 @@ class DestinationsRepository {
     }
 
   }
+
+  findByID(destinationID) {
+
+    const targetDestination = this.allDestinations.find(destination => {
+      return destination.id === destinationID;
+    });
+
+    if (targetDestination) {
+      return targetDestination;
+    } else {
+      const unknownDestinationMsg = 
+      `Wait..., where are we?`;
+      return unknownDestinationMsg;
+    }
+
+  }
+
+
+
 
 
   // method to search for a single destination by name (based on traveler request input)

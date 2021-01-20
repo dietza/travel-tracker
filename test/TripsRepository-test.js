@@ -152,17 +152,17 @@ describe('TripsRepository', () => {
   it('should be able to access trips by the tripID', () => {
     const tripByID = tripsRepository.findByTripID(41);
 
-    expect(tripsRepository.allTrips[2].id).to.equal(3);
-    // expect(tripByID).to.deep.equal({
-    //   "id": 41,
-    //   "userID": 3,
-    //   "destinationID": 25,
-    //   "travelers": 3,
-    //   "date": "2020/08/30",
-    //   "duration": 11,
-    //   "status": "approved",
-    //   "suggestedActivities": []
-    // });
+    // expect(tripsRepository.allTrips[2].id).to.equal(3);
+    expect(tripByID).to.deep.equal({
+      "id": 41,
+      "userID": 3,
+      "destinationID": 25,
+      "travelers": 3,
+      "date": "2020/08/30",
+      "duration": 11,
+      "status": "approved",
+      "suggestedActivities": []
+    });
   })
 
   it('should filter trips based on a traveler\'s id number', () => {

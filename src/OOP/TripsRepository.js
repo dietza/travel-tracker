@@ -7,7 +7,6 @@ class TripsRepository {
     const travelerTrips = this.allTrips.filter(trip => {
       return trip.userID === travelerID;
     });
-
     return travelerTrips;
   }
 
@@ -18,13 +17,36 @@ class TripsRepository {
     return tripByID;
   }
 
-  calculateTravelerYearTotal() {
-    // const yearlyTotalCost
+  filterPastYear(travelerID, currentDate, yearAgoDate) {
+    const allTravelerTrips = this.filterByTravelerID(travelerID);
+    
+    const pastYearTrips = allTravelerTrips.filter(trip => {
+      if ((yearAgoDate < trip.date) && (trip.date < currentDate)) {
+        return trip;
+      }
+    })
+
+    return pastYearTrips;
   }
 
-  // method to  filter trips (by traveler id) from fetched data
-  
-  // method to calculate amount spent on trips in past 365 days (by traveler id, and date)
+  calculateYearlyTotal(travelerID, currentDate, yearAgoDate, destinationsRepo) {
+    const pastYearTrips = 
+    this.filterPastYear(travelerID, currentDate, yearAgoDate);
+
+    if (pastYearTrips.length > 0) {
+      const yearlyTotal = pastYearTrips.reduce((sum, trip) => {
+
+        const tripTotal = destinationsRepo.calculateTripEstimate(trip);
+        sum += tripTotal
+
+        return sum;
+      }, 0);
+
+      return yearlyTotal;
+    } else {
+      return 0;
+    }
+  }
 
 }
 

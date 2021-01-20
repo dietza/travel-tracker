@@ -1,5 +1,6 @@
 import chai from 'chai';
 const expect = chai.expect;
+import moment from 'moment';
 
 import TripsRepository from '../src/OOP/TripsRepository';
 import DestinationsRepository from '../src/OOP/DestinationsRepository';
@@ -15,6 +16,11 @@ const allTravelersData = [
     "id": 25,
     "name": "Leighton Doerrling",
     "travelerType": "relaxer"
+  },
+  {
+    "id": 35,
+    "name": "Lorilyn Frostdick",
+    "travelerType": "shopper"
   }
 ];
 
@@ -111,6 +117,16 @@ const allTripsData = [
     "duration": 11,
     "status": "approved",
     "suggestedActivities": []
+  },
+  {
+    "id": 189,
+    "userID": 25,
+    "destinationID": 15,
+    "travelers": 4,
+    "date": "2019/12/01",
+    "duration": 10,
+    "status": "approved",
+    "suggestedActivities": []
   }
 ];
 
@@ -118,17 +134,26 @@ describe('TripsRepository', () => {
 
   let traveler3;
   let traveler25;
+  let traveler35;
   let destinationsRepository;
   let tripsRepository;
+  let today;
+  let oneYearAgo;
   
   beforeEach(() => {
 
     traveler3 = allTravelersData[0];
     traveler25 = allTravelersData[1];
+    traveler35 = allTravelersData[2];
 
     destinationsRepository = new DestinationsRepository(allDestinationsData);
 
-    tripsRepository = new TripsRepository(allTripsData)
+    tripsRepository = new TripsRepository(allTripsData);
+
+    today = moment().format('YYYY/MM/DD');
+
+    oneYearAgo = moment().subtract(366, 'days').format('YYYY/MM/DD');
+    
   });
 
   it('should be an instance of the TripsRepository class', ()=> {
@@ -169,15 +194,76 @@ describe('TripsRepository', () => {
     const travelerTrips25 = tripsRepository.filterByTravelerID(traveler25.id);
     const travelerTrips3 = tripsRepository.filterByTravelerID(traveler3.id);
 
-    expect(travelerTrips25).to.deep.equal([]);
+    expect(travelerTrips25).to.deep.equal([{
+      "id": 189,
+      "userID": 25,
+      "destinationID": 15,
+      "travelers": 4,
+      "date": "2019/12/01",
+      "duration": 10,
+      "status": "approved",
+      "suggestedActivities": []
+    }]);
     expect(travelerTrips3.length).to.equal(2);
   })
 
-  it('should calc total a traveler spent on trips in the past year', () => {
-    // const travelerTotal25 = tripsRepository.calculateTravelerYearTotal();
-    const travelerTotal = tripsRepository.calculateTravelerYearTotal(traveler3.id);
+  it('should filter a traveler\'s trips for the past year', () => {
+    const travelYear3 = tripsRepository.filterPastYear
+    (traveler3.id, today, oneYearAgo);
+    const travelYear35 = tripsRepository.filterPastYear
+    (traveler35.id, today, oneYearAgo);
+    const travelYear25 = tripsRepository.filterPastYear
+    (traveler25.id, today, oneYearAgo);
 
-    expect(travelerTotal).to.equal(0);
+    expect(travelYear3).to.deep.equal([
+      {
+        "id": 3,
+        "userID": 3,
+        "destinationID": 22,
+        "travelers": 4,
+        "date": "2020/05/22",
+        "duration": 17,
+        "status": "pending",
+        "suggestedActivities": []
+      },
+      {
+        "id": 41,
+        "userID": 3,
+        "destinationID": 25,
+        "travelers": 3,
+        "date": "2020/08/30",
+        "duration": 11,
+        "status": "approved",
+        "suggestedActivities": []
+      }
+    ]);    
+    expect(travelYear35).to.deep.equal([
+      {
+        "id": 2,
+        "userID": 35,
+        "destinationID": 25,
+        "travelers": 5,
+        "date": "2020/10/04",
+        "duration": 18,
+        "status": "pending",
+        "suggestedActivities": []
+      }
+    ]);
+    expect(travelYear25).to.deep.equal([]);
+  })
+
+  it('should calc total a traveler spent on trips in the past year', () => {
+
+    const yearlyTotalCost3 = tripsRepository.calculateYearlyTotal
+    (traveler3.id, today, oneYearAgo, destinationsRepository);
+    const yearlyTotalCost35 = tripsRepository.calculateYearlyTotal
+    (traveler35.id, today, oneYearAgo, destinationsRepository);
+    const yearlyTotalCost25 = tripsRepository.calculateYearlyTotal
+    (traveler25.id, today, oneYearAgo, destinationsRepository);
+    
+    expect(yearlyTotalCost3).to.equal(15095);
+    expect(yearlyTotalCost35).to.equal(16750);
+    expect(yearlyTotalCost25).to.equal(0);
   })
 
 })

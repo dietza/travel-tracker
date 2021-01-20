@@ -4,7 +4,6 @@ class DestinationsRepository {
   }
 
   findByName(requestDestinationName) {
-
     const targetDestination = this.allDestinations.find(destination => {
       return destination.destination.includes(requestDestinationName);
     });
@@ -16,11 +15,9 @@ class DestinationsRepository {
       `Sorry, we can't get you to ${requestDestinationName} ...yet!`;
       return unavailDestinationMsg;
     }
-
   }
 
   findByID(destinationID) {
-
     const targetDestination = this.allDestinations.find(destination => {
       return destination.id === destinationID;
     });
@@ -32,11 +29,9 @@ class DestinationsRepository {
       `Wait..., where are we?`;
       return unknownDestinationMsg;
     }
-
   }
 
   calculateTripEstimate(requestedTrip) {
-
     const missingDetails = this.confirmRequestedTripDetails(requestedTrip);
 
     if (missingDetails) {
@@ -54,11 +49,9 @@ class DestinationsRepository {
     const estTripTotal = estFlightTotal + estLodgingTotal;
     
     return estTripTotal;
-
   }
 
   confirmRequestedTripDetails(requestedTrip) {
-
     const missingInfoMsg = 'Missing info: ';
 
     if (!requestedTrip.destinationID) {
@@ -68,7 +61,6 @@ class DestinationsRepository {
     } else if (!requestedTrip.duration) {
       return missingInfoMsg + 'How long do you want to be there?';
     }
-
   }
 
 }

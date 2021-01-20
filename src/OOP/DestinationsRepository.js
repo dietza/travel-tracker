@@ -35,7 +35,11 @@ class DestinationsRepository {
 
   }
 
+  calculateTripEstimate() {
 
+    
+
+  }
 
 
 

@@ -2,21 +2,8 @@ import chai from 'chai';
 const expect = chai.expect;
 
 import DestinationsRepository from '../src/OOP/DestinationsRepository';
-// import TripsRepository from '../src/OOP/TripsRepository';
+import TripsRepository from '../src/OOP/TripsRepository';
 
-
-const allTravelersData = [
-  {
-    "id": 3,
-    "name": "Sibby Dawidowitsch",
-    "travelerType": "shopper"
-  },
-  {
-    "id": 25,
-    "name": "Leighton Doerrling",
-    "travelerType": "relaxer"
-  }
-];
 
 const allDestinationsData = [
   {
@@ -61,74 +48,49 @@ const allDestinationsData = [
   }
 ];
 
-// const allTripsData = [
-//   {
-//     "id": 1,
-//     "userID": 44,
-//     "destinationID": 49,
-//     "travelers": 1,
-//     "date": "2019/09/16",
-//     "duration": 8,
-//     "status": "approved",
-//     "suggestedActivities": []
-//   },
-//   {
-//     "id": 2,
-//     "userID": 35,
-//     "destinationID": 25,
-//     "travelers": 5,
-//     "date": "2020/10/04",
-//     "duration": 18,
-//     "status": "pending",
-//     "suggestedActivities": []
-//   },
-//   {
-//     "id": 3,
-//     "userID": 3,
-//     "destinationID": 22,
-//     "travelers": 4,
-//     "date": "2020/05/22",
-//     "duration": 17,
-//     "status": "pending",
-//     "suggestedActivities": []
-//   },
-//   {
-//     "id": 4,
-//     "userID": 43,
-//     "destinationID": 14,
-//     "travelers": 2,
-//     "date": "2020/02/25",
-//     "duration": 10,
-//     "status": "approved",
-//     "suggestedActivities": []
-//   },
-//   {
-//     "id": 41,
-//     "userID": 3,
-//     "destinationID": 25,
-//     "travelers": 3,
-//     "date": "2020/08/30",
-//     "duration": 11,
-//     "status": "approved",
-//     "suggestedActivities": []
-//   }
-// ];
+const requestedTripsData = [
+  {
+    "id": 2,
+    "userID": 35,
+    "destinationID": 25,
+    "travelers": 5,
+    "date": "2020/10/04",
+    "duration": 18,
+    "status": "pending",
+    "suggestedActivities": []
+  },
+  {
+    "id": 3,
+    "userID": 3,
+    "destinationID": 22,
+    "travelers": 4,
+    "date": "2020/05/22",
+    "duration": 17,
+    "status": "pending",
+    "suggestedActivities": []
+  },
+  {
+    "id": 138,
+    "userID": 25,
+    "destinationID": 22,
+    "travelers": 3,
+    "date": "2020/10/29",
+    "duration": 18,
+    "status": "pending",
+    "suggestedActivities": []
+  }
+];
 
 describe('DestinationsRepository', () => {
 
-  let traveler3;
-  let traveler25;
   let destinationsRepository;
-  // let tripsRepository;
+  // let requestedTrips;
   
   beforeEach(() => {
 
-    traveler3 = allTravelersData[0];
-    traveler25 = allTravelersData[1];
-
     destinationsRepository = new DestinationsRepository(allDestinationsData);
 
-    // tripsRepository = new TripsRepository(allTripsData);
+    // requestedTrips = new TripsRepository(requestedTripsData);
 
   });
 
@@ -200,6 +162,22 @@ describe('DestinationsRepository', () => {
       "alt": "aerial photography of rocky mountain under cloudy sky"
     });
     expect(foundByIDxx).to.deep.equal("Wait..., where are we?");
+
+  })
+
+  it('should calculate a cost estimate given the destinationID, based on trip duration and number of travelers', () => {
+
+    const requestedTrip2 = requestedTripsData[0];
+    // const requestedTrip3 = requestedTripsData[1];
+    const requestedTrip138 = requestedTripsData[2];
+
+    const trip2Estimate = destinationsRepository.calculateTripEstimate(requestedTrip2);
+    // const trip3Estimate = destinationsRepository.calculateTripEstimate(requestedTrip3);
+    const trip138Estimate = destinationsRepository.calculateTripEstimate(requestedTrip138);
+
+    expect(trip2Estimate).to.equal();
+    // expect(trip3Estimate).to.equal();
+    expect(trip138Estimate).to.equal();
 
   })
 

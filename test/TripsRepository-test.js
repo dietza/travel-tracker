@@ -152,7 +152,7 @@ describe('TripsRepository', () => {
   it('should be able to access trips by the tripID', () => {
     const tripByID = tripsRepository.findByTripID(41);
 
-    // expect(tripsRepository.allTrips[2].id).to.equal(3);
+    expect(tripsRepository.allTrips[2].id).to.equal(3);
     expect(tripByID).to.deep.equal({
       "id": 41,
       "userID": 3,

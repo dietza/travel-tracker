@@ -158,7 +158,6 @@ describe('DestinationsRepository', () => {
       "alt": "aerial photography of rocky mountain under cloudy sky"
     });
     expect(foundByIDxx).to.deep.equal("Wait..., where are we?");
-
   })
 
   it('should calculate a cost estimate for a requested trip', () => {
@@ -174,8 +173,25 @@ describe('DestinationsRepository', () => {
     expect(trip2Estimate).to.equal(16750);
     expect(trip3Estimate).to.equal(8720);
     expect(trip138Estimate).to.equal(6810);
-
   })
 
+  it('should return a message if the trip request is missing info', () => {
+    const requestedTripXX = 
+    {"travelers": 3, "duration": 18};
+    const requestedTripYY = 
+    {"destinationID": 22, "duration": 18};
+    const requestedTripZZ = 
+    {"destinationID": 22, "travelers": 3};
+
+    const tripXEstimate = destinationsRepository.calculateTripEstimate(requestedTripXX);
+    const tripYEstimate = destinationsRepository.calculateTripEstimate(requestedTripYY);
+    const tripZEstimate = destinationsRepository.calculateTripEstimate(requestedTripZZ);
+
+    expect(tripXEstimate).to.equal('Missing info: Where are we going?');
+    expect(tripYEstimate).to.equal
+    ('Missing info: How many people are traveling?');
+    expect(tripZEstimate).to.equal
+    ('Missing info: How long do you want to be there?');
+  })
 
 })

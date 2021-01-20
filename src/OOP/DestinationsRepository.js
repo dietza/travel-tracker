@@ -37,7 +37,12 @@ class DestinationsRepository {
 
   calculateTripEstimate(requestedTrip) {
 
-    // this.confirmRequestedTripDetails(requestedTrip);
+    const missingDetails = this.confirmRequestedTripDetails(requestedTrip);
+    console.log('missingDetails >>>>> ', missingDetails);
+
+    if (missingDetails) {
+      return missingDetails;
+    }
 
     const numTravelers = requestedTrip.travelers;
     const numDays = requestedTrip.duration;
@@ -62,6 +67,19 @@ class DestinationsRepository {
 
   }
 
+  confirmRequestedTripDetails(requestedTrip) {
+
+    const missingInfoMsg = 'Missing info: ';
+
+    if (!requestedTrip.destinationID) {
+      return missingInfoMsg + 'Where are we going?';
+    } else if (!requestedTrip.travelers) {
+      return missingInfoMsg + 'How many people are traveling?';
+    } else if (!requestedTrip.duration) {
+      return missingInfoMsg + 'How long do you want to be there?';
+    }
+
+  }
 
 
 

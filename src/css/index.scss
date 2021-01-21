@@ -31,24 +31,47 @@ header {
   grid-area: header;
   @include border($seafoam, 1rem);
   margin-right: 50px;
+
+  @include transparency($black, .25);
 }
 
 footer {
   grid-area: footer;
   @include border($seafoam, 1rem);
   margin-right: 50px;
+
+  @include transparency($black, .25);
 }
 
 main {
-  grid-area: main;
-  // position: relative;
-  @include border($seafoam, 1rem);
+  max-height: 100vh;
   margin-right: 50px;
   overflow: scroll;
+
+  @include border($seafoam, 1rem);
+}
+
+article {
+  display: flex;
+  flex-direction: column;
+
+  @include transparency($black, .25);
+  @include border($seafoam, 1rem);
+}
+
+img {
+  align-self: center;
+  width: 35rem;
+  height: auto;
+  margin: .65rem;
+
+  @include round-corners(.45rem);
 }
 
 form {
   grid-area: sidebar;
+
+  @include transparency($black, .25);
   @include border($seafoam, 1rem);
 }
 
@@ -67,7 +90,7 @@ h3 {
 }
 
 p {
-  @include label-text(1.15rem, 300, $white);
+  @include label-text(1.15rem, 350, $white);
 }
 
 label {
@@ -80,7 +103,7 @@ input {
   text-align: center;
   color: grey;
   margin: .75rem;
-
+  
   @include round-corners(.45rem);
 }
 
@@ -92,15 +115,17 @@ button {
   color: $white;
   padding: .5rem;
   margin: 1rem;
-
+  
   @include transparency($black, .75);
   @include border($seafoam, .5rem);
-
+  
   cursor: crosshair;
   &:focus {
     background-color: $cool-grey;
   }
 }
+
+
 
 
 

@@ -9,6 +9,13 @@ $black: #000000ce;
 $cool-grey:	#327577;
 $seafoam:	#19d3ca;
 
+// BREAKPOINTS
+
+$phone: 600px;
+$tab-port: 900px;
+$tab-land: 1200px;
+$big-desktop: 1800px;
+
 // MIXINS
 
 @mixin display-grid($columns) {

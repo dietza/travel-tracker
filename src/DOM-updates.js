@@ -175,6 +175,7 @@ let domUpdates = {
   },
 
   displayErrorMessage(message) {
+    tripEstimateDisplay.innerHTML = '';
     errorMessageDisplay.innerHTML =
       `<article tabindex="0" class="error-message">
           <label for="form__input-error" class="label-text">
@@ -184,11 +185,7 @@ let domUpdates = {
         </article>`;
   },
 
-  buildNewTrip(tripInputs, tripsRepository) {
-
-    console.log('tripsRepo!!!!', tripsRepository['allTrips'].length + 1)
-    // const newID = tripsRepository['allTrips'].length + 1;
-
+  buildNewTrip(tripInputs) {
     const requestedTrip = 
     {
       id: Date.now(),
@@ -204,6 +201,28 @@ let domUpdates = {
     console.log('requestedTrip', requestedTrip)
 
     return requestedTrip;
+  },
+
+  displayPostMessage(message) {
+    domUpdates.clearErrors();
+    errorMessageDisplay.innerHTML =
+      `<article tabindex="0" class="error-message">
+          <label for="form__input-error" class="label-text">
+            SUCCESS!</label>
+          <p class="form__input-error" name="form__input-error">
+          ${message}</p>
+        </article>`;
+  },
+
+  displayFailMessage(message) {
+    domUpdates.clearErrors();
+    errorMessageDisplay.innerHTML =
+      `<article tabindex="0" class="error-message">
+          <label for="form__input-error" class="label-text">
+            WHOOPS! TRY AGAIN?</label>
+          <p class="form__input-error" name="form__input-error">
+          ${message}</p>
+        </article>`;
   },
 
   clearErrors() {

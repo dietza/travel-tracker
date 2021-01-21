@@ -36,25 +36,12 @@ let fetchApi = {
   },
 
   postNewTrip(tripRequest) {
-    console.log('IN POST >>>', tripRequest.destinationID);
-    console.log('2 IN POST >>>', tripRequest);
-
     return fetch('http://localhost:3001/api/v1/trips', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(tripRequest)
-      // body: JSON.stringify({
-      //   "id": parseInt(`${newID}`),
-      //   "userID": parseInt(`${tripRequest.userID}`),
-      //   "destinationID": parseInt(`${tripRequest.destinationID}`),
-      //   "travelers": parseInt(`${tripRequest.travelers}`),
-      //   "date": `"${tripRequest.date}"`,
-      //   "duration": parseInt(`${tripRequest.duration}`),
-      //   "status": "pending",
-      //   "suggestedActivities": []
-      // })
     })
       .then(response => response.json())
       .then(promise => promise)

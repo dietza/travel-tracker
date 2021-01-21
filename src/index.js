@@ -11,7 +11,17 @@ import TripsRepository from './OOP/TripsRepository';
 import DestinationsRepository from './OOP/DestinationsRepository'
 
 import {fetchApi} from './Fetch-API';
-import {domUpdates} from './DOM-updates';
+import {
+  domUpdates,
+  main,
+  requestForm,
+  dateInput,
+  durationInput,
+  numTravelersInput,
+  destinationInput,
+  quoteButton,
+  requestButton,
+  tripEstimateDisplay} from './DOM-updates';
 
 // // QUERY SELECTORS
 
@@ -65,8 +75,13 @@ const buildTravelerDashboard = () => {
       domUpdates.displayYearlyCost
       (travelerID, today, oneYearAgo, destinationsRepository, tripsRepository);
 
+      domUpdates.populateDestinationOptions(destinationsRepository);
     });
 }
 
+const getTripEstimate = 
 
-window.addEventListener('load', buildTravelerDashboard())
+window.addEventListener('load', buildTravelerDashboard());
+// estimateButton.addEventListener('click', );
+// requestButton.addEventListener('click', );
+

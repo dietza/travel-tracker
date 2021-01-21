@@ -7,6 +7,11 @@
   text-align: center;
   margin: 0;
   font-family: $font;
+
+  &:focus {
+
+    box-shadow: 0px 0px 5px 2px $white;
+  }
 }
 
 .wrapper {
@@ -32,7 +37,7 @@ header {
   @include border($seafoam, 1rem);
   margin-right: 50px;
 
-  @include transparency($black, .25);
+  @include transparency($black, .30);
 }
 
 footer {
@@ -40,7 +45,7 @@ footer {
   @include border($seafoam, 1rem);
   margin-right: 50px;
 
-  @include transparency($black, .25);
+  @include transparency($black, .30);
 }
 
 main {
@@ -55,7 +60,7 @@ article {
   display: flex;
   flex-direction: column;
 
-  @include transparency($black, .25);
+  @include transparency($black, .30);
   @include border($seafoam, 1rem);
 }
 
@@ -66,12 +71,17 @@ img {
   margin: .65rem;
 
   @include round-corners(.45rem);
+
+}
+
+.trip-detail__trip-estimate-image {
+  width: 20rem;
 }
 
 form {
   grid-area: sidebar;
 
-  @include transparency($black, .25);
+  @include transparency($black, .30);
   @include border($seafoam, 1rem);
 }
 
@@ -98,13 +108,18 @@ label {
 }
 
 input {
-  width: 10rem;
+  width: 15rem;
   height: 1.5rem;
   text-align: center;
   color: grey;
   margin: .75rem;
   
   @include round-corners(.45rem);
+}
+
+datalist {
+  box-sizing: 20rem;
+  overflow-y: auto;
 }
 
 button {
@@ -124,7 +139,6 @@ button {
     background-color: $cool-grey;
   }
 }
-
 
 
 

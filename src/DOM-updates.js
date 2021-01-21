@@ -1,14 +1,23 @@
 // QUERY SELECTORS
 
-const main = document.querySelector("main");
-const requestForm = document.querySelector("form");
-const dateInput = document.querySelector(".form__date-input");
-const durationInput = document.querySelector(".form__duration-input");
-const numTravelersInput = document.querySelector(".form__travelers-input");
-const destinationInput = document.querySelector(".form__destination-input");
-const quoteButton = document.querySelector('.form__estimate-trip-button');
-const requestButton = document.querySelector('.form__submit-request-button');
-const tripEstimateDisplay = document.querySelector(".trip-estimate-display");
+export const main = document.querySelector("main");
+export const requestForm = document.querySelector("form");
+export const dateInput = document.querySelector(".form__date-input");
+export const durationInput = document.querySelector(".form__duration-input");
+export const numTravelersInput = 
+document.querySelector(".form__travelers-input");
+export const destinationInput = 
+document.querySelector(".form__destination-input");
+export const estimateButton = 
+document.querySelector('.form__estimate-trip-button');
+export const requestSubmitButton = 
+document.querySelector('.form__submit-request-button');
+export const yearlyCostDisplay = 
+document.querySelector(".traveler-detail__yearly-cost-display");
+export const errorMessageDisplay = 
+document.querySelector('.form__error-message');
+export const tripEstimateDisplay = 
+document.querySelector(".trip-estimate-display");
 
 // const usernameInput = document.querySelector(".form__username-input");
 // const passwordInput = document.querySelector(".form__password-input");
@@ -34,20 +43,21 @@ let domUpdates = {
 
     travelerTrips.forEach(trip => {
 
+      const displayDate = domUpdates.reformatDate(trip.date);
       const destination = destinationsRepo.findByID(trip.destinationID);
       main.insertAdjacentHTML('beforeend', 
         `<article tabindex="0" class="trip-display">
         <img src=${destination.image}" alt ="${destination.alt}">
         <br>
           <section class="trip-details">
-            <p class="trip-detail__date">${trip.date}</p>
-            <h3 class-"trip-detail__destination">
-            ${destination.destination}</h3>
-            <p class="trip-detail__travelers">
-            NUMBER of TRAVELERS: ${trip.travelers}</p>
-            <p class="trip-detail__duration">
-            NUMBER of DAYS: ${trip.duration}</p>
-            <p class="trip-detail__status">TRIP STATUS: ${trip.status}</p>
+          <h3 class-"trip-detail__destination">
+          ${destination.destination}</h3>
+          <p class="trip-detail__date">START DATE: ${displayDate}</p>
+          <p class="trip-detail__travelers">
+          NUMBER of TRAVELERS: ${trip.travelers}</p>
+          <p class="trip-detail__duration">
+          NUMBER of DAYS: ${trip.duration}</p>
+          <p class="trip-detail__status">TRIP STATUS: ${trip.status}</p>
           </section>
         </article>
       `); 
@@ -58,34 +68,173 @@ let domUpdates = {
 
   displayYearlyCost
   (travelerID, today, oneYearAgo, destinationsRepository, tripsRepository) {
-
     const yearlyCost = domUpdates.calculateYearlyCost
     (travelerID, today, oneYearAgo, destinationsRepository, tripsRepository);
 
+    const displayDate = domUpdates.reformatDate(oneYearAgo);
+
     requestForm.insertAdjacentHTML('afterend', 
-      `<article tabindex="0" class="cost-display">
+      `<article tabindex="0" class="traveler-detail__yearly-cost-display">
         <label for="traveler-detail__yearly-cost" class="label-text">
           YOU'VE SPENT: </label>
-            <br>
             <h2 class-"traveler-detail__yearly-cost" 
             name="traveler-detail__yearly-cost">
             $${yearlyCost}</h2>
             <p class="traveler-detail__past-year">
-            ON TRIPS SINCE ${oneYearAgo}</p>
+            ON TRIPS SINCE ${displayDate}</p>
         </article>
       `);
+  },
 
+  reformatDate(rawDate) {
+    const splitDate = rawDate.split("/");
+    const year = splitDate[0];
+    const month = splitDate[1];
+    const day = splitDate[2];
+    const reformattedDate = 
+    new Date([month, day, year]).toLocaleDateString("en-US");
+
+    return reformattedDate;
   },
 
   calculateYearlyCost
-  (travelerID, today, oneYearAgo, destinationsRepository, tripsRepository) {
-    const yearlyTripsTotal = tripsRepository.calculateYearlyTotal
-    (travelerID, today, oneYearAgo, destinationsRepository);
+  (travelerID, today, oneYearAgo, destinationsRepo, tripsRepo) {
+    const yearlyTripsTotal = tripsRepo.calculateYearlyTotal
+    (travelerID, today, oneYearAgo, destinationsRepo);
 
     const commission = yearlyTripsTotal * .10;
     const totalCost = (yearlyTripsTotal + commission).toFixed(2);
     return totalCost;
-  }
+  },
+
+  populateDestinationOptions(destinationsRepo) {
+    const sortedDestinations = 
+    domUpdates.sortDestinationsList(destinationsRepo);
+
+    destinationInput.insertAdjacentHTML('afterend',
+      `<datalist id="destination-options" 
+      class="form__destination-options datalist">
+      </datalist>`);
+
+    const destinationOptions = 
+    document.querySelector(".form__destination-options");
+
+    sortedDestinations.forEach(destination => {
+
+      destinationOptions.insertAdjacentHTML('beforeend',
+        `<option value="${destination.destination}">
+        ${destination.destination}
+        </option>
+        `);
+    });
+  },
+
+  sortDestinationsList(destinationsRepo) {
+    const sortedDestinations = destinationsRepo.allDestinations.sort((a, b)=> {
+      if ((a.destination.split(",")[0] > b.destination.split(",")[0])) {
+        return 1;
+      } else if (a.destination.split(",")[0] < b.destination.split(",")[0]) {
+        return -1;
+      }
+    });
+    return sortedDestinations;
+  },
+
+  displayEstimate(tripEstimate, tripInputs, destinationsRepo) {
+    const destination = destinationsRepo.findByID(tripInputs.destinationID);
+    const displayDate = (tripInputs.date).replaceAll("-", "/");
+    tripEstimateDisplay.innerHTML = '';
+    tripEstimateDisplay.innerHTML = 
+      `<article tabindex="0" class="trip-estimate-display">
+        <img src=${destination.image}" 
+        alt ="${destination.alt}" class="trip-detail__trip-estimate-image">
+        <label for="trip-detail__trip-estimate-display" class="label-text">
+        ESTIMATE: </label>
+          <h2 class-"trip-detail__trip-estimate-display" 
+          name="trip-detail__trip-estimate-display">
+          $${tripEstimate}</h2>
+          <section class="trip-details">
+          <label for="trip-detail__destination" class="label-text">
+          TO VISIT </label>
+          <h3 class-"trip-detail__destination">
+          ${destination.destination}</h3>
+          <p class="trip-detail__date">START DATE: ${displayDate}</p>
+          <p class="trip-detail__travelers">
+          NUMBER of TRAVELERS: ${tripInputs.travelers}</p>
+          <p class="trip-detail__duration">
+          NUMBER of DAYS: ${tripInputs.duration}</p>
+          <p class="trip-detail__status">
+          TRIP STATUS: ${tripInputs.status}</p>
+          </section>
+
+      </article>
+    `;
+    
+    console.log('destination >>>', destination);
+
+  },
+
+  displayErrorMessage(message) {
+    tripEstimateDisplay.innerHTML = '';
+    errorMessageDisplay.innerHTML =
+      `<article tabindex="0" class="error-message">
+          <label for="form__input-error" class="label-text">
+            CHECK INPUTS!</label>
+          <p class="form__input-error" name="form__input-error">
+          ${message}</p>
+        </article>`;
+  },
+
+  buildNewTrip(tripInputs) {
+    const requestedTrip = 
+    {
+      id: Date.now(),
+      userID: tripInputs.userID,
+      destinationID: tripInputs.destinationID,
+      travelers: tripInputs.travelers,
+      date: tripInputs.date.replaceAll("-", "/"),
+      duration: tripInputs.duration,
+      status: "pending",
+      suggestedActivities: []
+    };
+
+    console.log('requestedTrip', requestedTrip)
+
+    return requestedTrip;
+  },
+
+  displayPostMessage(message) {
+    domUpdates.clearErrors();
+    errorMessageDisplay.innerHTML =
+      `<article tabindex="0" class="error-message">
+          <label for="form__input-error" class="label-text">
+            SUCCESS!</label>
+          <p class="form__input-error" name="form__input-error">
+          ${message}</p>
+        </article>`;
+  },
+
+  displayFailMessage(message) {
+    domUpdates.clearErrors();
+    errorMessageDisplay.innerHTML =
+      `<article tabindex="0" class="error-message">
+          <label for="form__input-error" class="label-text">
+            WHOOPS! TRY AGAIN?</label>
+          <p class="form__input-error" name="form__input-error">
+          ${message}</p>
+        </article>`;
+  },
+
+  clearErrors() {
+    errorMessageDisplay.innerHTML = '';
+  },
+
+  clearInputs() {
+    dateInput.value = '';
+    durationInput.value = '';
+    numTravelersInput.value = '';
+    destinationInput.value = '';
+  },
 
 }
 

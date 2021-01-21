@@ -35,34 +35,19 @@ let fetchApi = {
     return fetchedTripsData;
   },
 
-  postNewTrip(tripRequest, tripDate, tripsRepo) {
-    fetch('http://localhost:3001/api/v1/trips', {
+  postNewTrip(tripRequest) {
+    return fetch('http://localhost:3001/api/v1/trips', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        "id": parseInt(tripsRepo.allTripsData.length + 1),
-        "userID": parseInt(tripRequest.userID),
-        "destinationID": parseInt(tripRequest.destinationID),
-        "travelers": parseInt(tripRequest.userID),
-        "date": `${tripDate}`,
-        "duration": parseInt(tripRequest.duration),
-        "status": "pending",
-        "suggestedActivities": []
-      })
+      body: JSON.stringify(tripRequest)
     })
       .then(response => response.json())
-      .catch(error => console.log(error.message))
+      .then(promise => promise)
+      .catch(error => alert(error.message))
   },
-
-  // displayErrorMessage(message) {
-  //   const messages = document.querySelector('.messages');
-  //   messages.innerText = message;
-  //   ///// add messages section to HTML where this will display the error message
-  //   ///// move this display to call from DOM-updates
-  // }
 
 }
 
-export {fetchApi};
+export default fetchApi;

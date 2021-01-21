@@ -36,6 +36,7 @@ const getRandomID = () => {
 let destinationsRepository;
 let tripsRepository;
 let traveler;
+let yearlyCost;
 
 const today = moment().format('YYYY/MM/DD');
 const oneYearAgo = moment().subtract(366, 'days').format('YYYY/MM/DD');
@@ -59,9 +60,26 @@ const buildTravelerDash = () => {
       tripsRepository = new TripsRepository(response[2]);
 
       domUpdates.displayTrips(traveler, tripsRepository, destinationsRepository);
+      yearlyCost = getYearlyCost
+      (travelerID, today, oneYearAgo, destinationsRepository);
+      
+      domUpdates.displayYearlyCost(yearlyCost);
     });
 }
 
+
+const getYearlyCost = 
+(travelerID, today, oneYearAgo, destinationsRepository) => {
+  const yearlyTripsTotal = tripsRepository.calculateYearlyTotal
+  (travelerID, today, oneYearAgo, destinationsRepository);
+
+  console.log('yearlyTripsTotal >>>>', yearlyTripsTotal);
+
+
+  const commission = yearlyTripsTotal * .10;
+  const totalCost = (yearlyTripsTotal + commission).toFixed(2);
+  return totalCost;
+}
 
 
 window.addEventListener('load', buildTravelerDash())

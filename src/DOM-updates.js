@@ -22,9 +22,13 @@ let domUpdates = {
     const travelerTrips = tripsRepo.filterByTravelerID(traveler.id);
     main.innerHTML = ''
 
+    domUpdates.buildTripDisplayHTML(traveler, destinationsRepo, travelerTrips);
+  },
+
+  buildTripDisplayHTML(traveler, destinationsRepo, travelerTrips) {
     let tripsDisplay = 
     main.insertAdjacentHTML('afterbegin', `<h2 class="welcome traveler-name">WELCOME BACK, ${(traveler.name).toUpperCase()}!</h2>`)
-    
+
     travelerTrips.forEach(trip => {
       //////////////////////////////////////////////////////////////////////////
       console.log('TRIP >>>>>> ', trip);
@@ -45,12 +49,19 @@ let domUpdates = {
             <p class="trip-detail__status">TRIP STATUS: ${trip.status}</p>
           </section>
         </article>
-      `);
+      `); 
     })
 
     return tripsDisplay;
-  }
+  },
 
+  displayYearlyCost(travelerYearlyTotal) {
+
+
+    
+    console.log('travelerYearlyTotal >>>>', travelerYearlyTotal);
+
+  }
 
 }
 

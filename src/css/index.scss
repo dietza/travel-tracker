@@ -107,6 +107,11 @@ input {
   @include round-corners(.45rem);
 }
 
+datalist {
+  box-sizing: 20rem;
+  overflow-y: auto;
+}
+
 button {
   font-weight: 300;
   font-stretch: normal;

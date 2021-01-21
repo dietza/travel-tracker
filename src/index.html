@@ -31,16 +31,8 @@
         <br>
         
         <label for="form__trip-destination" class="label-text">DESTINATION</label><br>
-        <input type="type" list="destination-options" class="form__destination-input" id="form-destination-input" name="form__trip-destination" aria-label="input to select destination for trip request" aria-required="true" placeholder="where to?">
+        <input type="text" list="destination-options" class="form__destination-input" id="form-destination-input" name="form__trip-destination" aria-label="input to select destination for trip request" aria-required="true" placeholder="where to?" autocomplete="on">
         <br>
-        
-        
-        <datalist id="destination-options">
-          <option value=""></option>
-          <!-- FILL OUT VALUES FOR EACH DESTINATION AVAILABLE,
-            move this to DOM-updates -->
-          </datalist>
-          
           
           <button class="form__estimate-trip-button" aria-label="view cost estimate for requested trip details">View Trip Estimate</button>
         </form>

@@ -106,8 +106,38 @@ let domUpdates = {
     return totalCost;
   },
 
-  populateDestinationOptions(destinationsRepository) {
+  populateDestinationOptions(destinationsRepo) {
 
+    const sortedDestinations = 
+    domUpdates.sortDestinationsList(destinationsRepo);
+
+    destinationInput.insertAdjacentHTML('afterend',
+      `<datalist id="destination-options" 
+      class="form__destination-options datalist">
+      </datalist>`);
+
+    const destinationOptions = 
+    document.querySelector(".form__destination-options");
+
+    sortedDestinations.forEach(destination => {
+
+      destinationOptions.insertAdjacentHTML('beforeend',
+        `<option value="${destination.destination}">
+        ${destination.destination}
+        </option>
+        `);
+    });
+  },
+
+  sortDestinationsList(destinationsRepo) {
+    const sortedDestinations = destinationsRepo.allDestinations.sort((a, b)=> {
+      if ((a.destination.split(",")[0] > b.destination.split(",")[0])) {
+        return 1;
+      } else if (a.destination.split(",")[0] < b.destination.split(",")[0]) {
+        return -1;
+      }
+    });
+    return sortedDestinations;
   },
 
 }

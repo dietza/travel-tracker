@@ -149,7 +149,8 @@ let domUpdates = {
 
     tripEstimateDisplay.innerHTML = 
       `<article tabindex="0" class="trip-estimate-display">
-        <img src=${destination.image}" alt ="${destination.alt}">
+        <img src=${destination.image}" 
+        alt ="${destination.alt}" class="trip-detail__trip-estimate-image">
         <label for="trip-detail__trip-estimate-display" class="label-text">
         ESTIMATE: </label>
           <h2 class-"trip-detail__trip-estimate-display" 

@@ -71,6 +71,11 @@ img {
   margin: .65rem;
 
   @include round-corners(.45rem);
+
+}
+
+.trip-detail__trip-estimate-image {
+  width: 20rem;
 }
 
 form {

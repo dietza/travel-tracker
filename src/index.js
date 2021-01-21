@@ -13,21 +13,25 @@ import DestinationsRepository from './OOP/DestinationsRepository'
 import {fetchApi} from './Fetch-API';
 import {domUpdates} from './DOM-updates';
 
-// QUERY SELECTORS
+// // QUERY SELECTORS
 
-const dateInput = document.querySelector(".form__date-input");
-const durationInput = document.querySelector(".form__duration-input");
-const numTravelersInput = document.querySelector(".form__travelers-input");
-const destinationInput = document.querySelector(".form__destination-input");
-const quoteButton = document.querySelector('.form__estimate-trip-button');
-const requestButton = document.querySelector('.form__submit-request-button');
+// const dateInput = document.querySelector(".form__date-input");
+// const durationInput = document.querySelector(".form__duration-input");
+// const numTravelersInput = document.querySelector(".form__travelers-input");
+// const destinationInput = document.querySelector(".form__destination-input");
+// const quoteButton = document.querySelector('.form__estimate-trip-button');
+// const requestButton = document.querySelector('.form__submit-request-button');
 
-// const usernameInput = document.querySelector(".form__username-input");
-// const passwordInput = document.querySelector(".form__password-input");
-// const loginButton = document.querySelector(".form__submit-login-button");
+// // const usernameInput = document.querySelector(".form__username-input");
+// // const passwordInput = document.querySelector(".form__password-input");
+// // const loginButton = document.querySelector(".form__submit-login-button");
 
 
 // GLOBAL
+
+const getRandomID = () => {
+  return Math.floor((Math.random() * (50 - 1)) + 1);
+}
 
 let destinationsRepository;
 let tripsRepository;
@@ -43,11 +47,6 @@ const fetchedTripsData = fetchApi.fetchTripsData();
 
 // DASH LOAD
 
-const getRandomID = () => {
-  return Math.floor(Math.random() * 50)
-}
-
-
 const buildTravelerDash = () => {
   Promise.all([
     fetchedTravelerData,
@@ -59,10 +58,10 @@ const buildTravelerDash = () => {
       destinationsRepository = new DestinationsRepository(response[1]);
       tripsRepository = new TripsRepository(response[2]);
 
-
-      domUpdates.displayTravelerTrips
-      (traveler, tripsRepository, destinationsRepository);
+      domUpdates.displayTrips(traveler, tripsRepository, destinationsRepository);
     });
 }
 
-buildTravelerDash();
+
+
+window.addEventListener('load', buildTravelerDash())

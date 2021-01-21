@@ -21,6 +21,7 @@ import {
   destinationInput,
   estimateButton,
   requestButton,
+  errorMessageDisplay,
   tripEstimateDisplay} from './DOM-updates';
 
 // // QUERY SELECTORS
@@ -74,6 +75,8 @@ Promise.all([
   });
 
 const buildTravelerDashboard = () => {
+  // domUpdates.clearErrors();
+  
   domUpdates.displayTrips
   (traveler, tripsRepository, destinationsRepository);
   
@@ -90,7 +93,8 @@ const setEventListeners = () => {
 }
 
 
-const getTripEstimate = () => {
+const getTripEstimate = (event) => {
+  event.preventDefault()
   const tripInputs = 
   {
     userID: travelerID,
@@ -102,11 +106,28 @@ const getTripEstimate = () => {
   };
   const tripEstimate = 
   destinationsRepository.calculateTripEstimate(tripInputs);
+
+  
   console.log('tripEstimate >>>>> ', tripEstimate);
-  alert(tripEstimate);
+
+ 
+
+  domUpdates.displayEstimate
+  (tripEstimate, tripInputs, destinationsRepository);
+
+  // alert(tripEstimate);
 
   // return tripEstimate;
 }
+
+// const checkEstimate = (tripEstimate) => {
+//   if (!tripEstimate instanceof 'number') {
+//     const errorMessage = tripEstimate;
+//     domUpdates.displayErrorMessage(errorMessage);
+//   } else {
+//     return tripEstimate;
+//   }
+// }
 
 
 

@@ -12,6 +12,10 @@ export const estimateButton =
 document.querySelector('.form__estimate-trip-button');
 export const requestButton = 
 document.querySelector('.form__submit-request-button');
+export const yearlyCostDisplay = 
+document.querySelector(".traveler-detail__yearly-cost-display");
+export const errorMessageDisplay = 
+document.querySelector('.form__error-message');
 export const tripEstimateDisplay = 
 document.querySelector(".trip-estimate-display");
 
@@ -70,7 +74,7 @@ let domUpdates = {
     const displayDate = domUpdates.reformatDate(oneYearAgo);
 
     requestForm.insertAdjacentHTML('afterend', 
-      `<article tabindex="0" class="cost-display">
+      `<article tabindex="0" class="traveler-detail__yearly-cost-display">
         <label for="traveler-detail__yearly-cost" class="label-text">
           YOU'VE SPENT: </label>
             <h2 class-"traveler-detail__yearly-cost" 
@@ -134,6 +138,68 @@ let domUpdates = {
       }
     });
     return sortedDestinations;
+  },
+
+  displayEstimate(tripEstimate, tripInputs, destinationsRepo) {
+
+    const destination = destinationsRepo.findByID(tripInputs.destinationID);
+    // const displayDate = domUpdates.reformatDate(tripInputs.date);
+
+    // yearlyCostDisplay.classList.add('.hidden');
+
+    tripEstimateDisplay.innerHTML = 
+      `<article tabindex="0" class="trip-estimate-display">
+        <img src=${destination.image}" alt ="${destination.alt}">
+        <label for="trip-detail__trip-estimate-display" class="label-text">
+        ESTIMATE: </label>
+          <h2 class-"trip-detail__trip-estimate-display" 
+          name="trip-detail__trip-estimate-display">
+          $${tripEstimate}</h2>
+          <section class="trip-details">
+          <label for="trip-detail__destination" class="label-text">
+          TO VISIT </label>
+          <h3 class-"trip-detail__destination">
+          ${destination.destination}</h3>
+          <p class="trip-detail__date">START DATE: ${tripInputs.date}</p>
+          <p class="trip-detail__travelers">
+          NUMBER of TRAVELERS: ${tripInputs.travelers}</p>
+          <p class="trip-detail__duration">
+          NUMBER of DAYS: ${tripInputs.duration}</p>
+          <p class="trip-detail__status">
+          TRIP STATUS: ${tripInputs.status}</p>
+          </section>
+      </article>
+    `;
+
+    console.log('destination >>>', destination);
+
+  },
+
+  displayErrorMessage(message) {
+
+    // alert(message);
+
+    console.log('ERROR >> ', message);
+
+    errorMessageDisplay.innerHTML(
+      `<article tabindex="0" class="error-message">
+          <label for="form__input-error" class="label-text">
+            CHECK INPUTS!</label>
+          <p class="form__input-error" name="form__input-error">
+          ${message}</p>
+        </article>`);
+
+  },
+
+  clearErrors() {
+    errorMessageDisplay.innerHTML = '';
+  },
+
+  clearInputs() {
+    dateInput.innerHTML = '';
+    durationInput.innerHTML = '';
+    numTravelersInput.innerHTML = '';
+    destinationInput.innerHTML = '';
   },
 
 }

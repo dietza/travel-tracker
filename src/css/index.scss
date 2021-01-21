@@ -44,10 +44,7 @@ footer {
 }
 
 main {
-  max-height: calc(100vh - 14.125rem);
-
-  // grid-area: main;
-  // position: relative;
+  max-height: 100vh;
   margin-right: 50px;
   overflow: scroll;
 
@@ -55,7 +52,6 @@ main {
 }
 
 article {
-  
   display: flex;
   flex-direction: column;
 
@@ -110,7 +106,6 @@ input {
   
   @include round-corners(.45rem);
 }
-
 
 button {
   font-weight: 300;

@@ -2,9 +2,9 @@ let fetchApi = {
 
   fetchCurrentTravelerData(travelerID) {
     console.log('travelerID', travelerID);
-    let fetchedTravelerData = fetch(`http://localhost:3001/api/v1/travelers/${travelerID}`)
+    let fetchedTravelerData = 
+    fetch(`http://localhost:3001/api/v1/travelers/${travelerID}`)
       .then(response => response.json())
-      // .then(data => console.log('data', data))
       .then(data => data)
       .catch(error => console.log(error.message));
     return fetchedTravelerData;
@@ -19,7 +19,8 @@ let fetchApi = {
   // },
 
   fetchDestinationsData() {
-    let fetchedDestinationsData = fetch('http://localhost:3001/api/v1/destinations')
+    let fetchedDestinationsData = 
+    fetch('http://localhost:3001/api/v1/destinations')
       .then(response => response.json())
       .then(data => data.destinations)
       .catch(error => console.log(error.message));

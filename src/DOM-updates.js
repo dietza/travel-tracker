@@ -27,12 +27,13 @@ let domUpdates = {
 
   buildTripDisplayHTML(traveler, destinationsRepo, travelerTrips) {
     let tripsDisplay = 
-    main.insertAdjacentHTML('afterbegin', `<h2 class="welcome traveler-name">WELCOME BACK, ${(traveler.name).toUpperCase()}!</h2>`)
+    main.insertAdjacentHTML('afterbegin', 
+      `<h2 class="welcome traveler-name">
+      WELCOME BACK, ${(traveler.name).toUpperCase()}!
+      </h2>`)
 
     travelerTrips.forEach(trip => {
-      //////////////////////////////////////////////////////////////////////////
-      console.log('TRIP >>>>>> ', trip);
-      //////////////////////////////////////////////////////////////////////////
+
       const destination = destinationsRepo.findByID(trip.destinationID);
       main.insertAdjacentHTML('beforeend', 
         `<article tabindex="0" class="trip-display">
@@ -74,22 +75,16 @@ let domUpdates = {
         </article>
       `);
 
-    console.log('travelerYearlyTotal >>>>', yearlyCost);
-
   },
 
   calculateYearlyCost
   (travelerID, today, oneYearAgo, destinationsRepository, tripsRepository) {
-
     const yearlyTripsTotal = tripsRepository.calculateYearlyTotal
     (travelerID, today, oneYearAgo, destinationsRepository);
-  
-    console.log('yearlyTripsTotal >>>>', yearlyTripsTotal);
 
     const commission = yearlyTripsTotal * .10;
     const totalCost = (yearlyTripsTotal + commission).toFixed(2);
     return totalCost;
-
   }
 
 }

@@ -30,11 +30,6 @@ class TripsRepository {
   }
 
   calculateYearlyTotal(travelerID, currentDate, yearAgoDate, destinationsRepo) {
-
-    console.log('travelerID >>>>', travelerID);
-
-    console.log('TRAVELER >>>>', this.filterByTravelerID(travelerID));
-
     const pastYearTrips = 
     this.filterPastYear(travelerID, currentDate, yearAgoDate);
 

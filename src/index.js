@@ -48,7 +48,7 @@ const fetchedTripsData = fetchApi.fetchTripsData();
 
 // DASH LOAD
 
-const buildTravelerDash = () => {
+const buildTravelerDashboard = () => {
   Promise.all([
     fetchedTravelerData,
     fetchedDestinationsData,
@@ -61,27 +61,12 @@ const buildTravelerDash = () => {
 
       domUpdates.displayTrips
       (traveler, tripsRepository, destinationsRepository);
-      // yearlyCost = getYearlyCost
-      // (travelerID, today, oneYearAgo, destinationsRepository);
       
       domUpdates.displayYearlyCost
       (travelerID, today, oneYearAgo, destinationsRepository, tripsRepository);
+
     });
 }
 
 
-// const getYearlyCost = 
-// (travelerID, today, oneYearAgo, destinationsRepository) => {
-//   const yearlyTripsTotal = tripsRepository.calculateYearlyTotal
-//   (travelerID, today, oneYearAgo, destinationsRepository);
-
-//   console.log('yearlyTripsTotal >>>>', yearlyTripsTotal);
-
-
-//   const commission = yearlyTripsTotal * .10;
-//   const totalCost = (yearlyTripsTotal + commission).toFixed(2);
-//   return totalCost;
-// }
-
-
-window.addEventListener('load', buildTravelerDash())
+window.addEventListener('load', buildTravelerDashboard())

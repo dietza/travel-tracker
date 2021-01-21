@@ -1,19 +1,27 @@
 let fetchApi = {
 
   fetchCurrentTravelerData(travelerID) {
-    let fetchedCurrentTravelerData = fetch('http://localhost:3001/api/v1/travelers/${travelerID}')
+    let fetchedTravelerData = fetch('http://localhost:3001/api/v1/travelers/${travelerID}')
       .then(response => response.json())
       .then(data => data.travelers.find(traveler => traveler.id === travelerID))
       .catch(error => console.log(error.message));
-    return fetchedCurrentTravelerData;
+    return fetchedTravelerData;
   },
 
-  fetchAllTravelersData() {
-    let fetchedAllTravelersData = fetch('http://localhost:3001/api/v1/travelers')
+  // fetchAllTravelersData() {
+  //   let fetchedAllTravelersData = fetch('http://localhost:3001/api/v1/travelers')
+  //     .then(response => response.json())
+  //     .then(data => data.travelers)
+  //     .catch(error => console.log(error.message));
+  //   return fetchedAllTravelersData;
+  // },
+
+  fetchDestinationsData() {
+    let fetchedDestinationsData = fetch('http://localhost:3001/api/v1/destinations')
       .then(response => response.json())
-      .then(data => data.travelers)
+      .then(data => data.destinations)
       .catch(error => console.log(error.message));
-    return fetchedAllTravelersData;
+    return fetchedDestinationsData;
   },
 
   fetchTripsData() {
@@ -24,21 +32,14 @@ let fetchApi = {
     return fetchedTripsData;
   },
 
-  fetchDestinationsData() {
-    let fetchedDestinationsData = fetch('http://localhost:3001/api/v1/destinations')
-      .then(response => response.json())
-      .then(data => data.destinations)
-      .catch(error => console.log(error.message));
-    return fetchedDestinationsData;
-  },
-
-  postNewTrip(tripRequest, tripDate) {
+  postNewTrip(tripRequest, tripDate, tripsRepo) {
     fetch('http://localhost:3001/api/v1/trips', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
+        "id": parseInt(tripsRepo.allTripsData.length + 1),
         "userID": parseInt(tripRequest.userID),
         "destinationID": parseInt(tripRequest.destinationID),
         "travelers": parseInt(tripRequest.userID),

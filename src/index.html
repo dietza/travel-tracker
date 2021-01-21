@@ -13,11 +13,10 @@
     <header>
       <h1>EarthBound Travels</h1>
     </header>
-    <!-- <h1>EarthBound Travels</h1> -->
     
-    <nav role="form" tabindex="0" aria-label="form inputs for details to request a new trip">
+    <nav role="form" tabindex="0" aria-label="form to request a new trip">
       <form class="trip-request-form sidebar">
-        <h2>WHERE WOULD YOU LIKE TO EXPLORE NEXT?</h2>
+        <h2 class="trip-request-form title">WHERE WOULD YOU LIKE TO EXPLORE NEXT?</h2>
         
         <label for="form__date-selection" class="label-text">DEPARTURE DATE</label><br>
         <input type="date" class="form__date-input" id="date-input" name="form__date-selection" aria-label="input to select departure date for trip request" aria-required="true">
@@ -32,7 +31,7 @@
         <br>
         
         <label for="form__trip-destination" class="label-text">DESTINATION</label><br>
-        <input type="type" list="destination-options" class="form-destination" id="form-destination" name="form__trip-destination" aria-label="input to select destination for trip request" aria-required="true" placeholder="where to?">
+        <input type="type" list="destination-options" class="form__destination-input" id="form-destination-input" name="form__trip-destination" aria-label="input to select destination for trip request" aria-required="true" placeholder="where to?">
         <br>
         
         
@@ -43,7 +42,7 @@
           </datalist>
           
           
-          <button class="estimate-trip-button" aria-label="view cost estimate for requested trip details">View Trip Estimate</button>
+          <button class="form__estimate-trip-button" aria-label="view cost estimate for requested trip details">View Trip Estimate</button>
         </form>
       </nav>
       
@@ -54,15 +53,25 @@
       
       
           <main>
-            <section>
+            <!-- <section> -->
 
-              <h2>WELCOME BACK, ${(traveler.name).toUpperCase}!</h2>
+              
+              <section>
+                <h2 class="welcome traveler-name">WELCOME BACK, ${(traveler.name).toUpperCase}!</h2>
+                <section>
+                  
+                </section>
+
+              </section>
+
+
+
               <!-- FILL OUT with traveler name from DATA,
                   move this to DOM-updates -->
 
               <!--  POPULATE WITH TRAVELER's TRIPS ON LOGIN -->
 
-            </section>
+            <!-- </section> -->
           </main>
       
       

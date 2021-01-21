@@ -41,7 +41,7 @@ let domUpdates = {
           <section class="trip-details">
             <p class="trip-detail__date">${trip.date}</p>
             <h3 class-"trip-detail__destination">
-            ${destination.destination}</p>
+            ${destination.destination}</h3>
             <p class="trip-detail__travelers">
             NUMBER of TRAVELERS: ${trip.travelers}</p>
             <p class="trip-detail__duration">
@@ -55,11 +55,40 @@ let domUpdates = {
     return tripsDisplay;
   },
 
-  displayYearlyCost(travelerYearlyTotal) {
+  displayYearlyCost
+  (travelerID, today, oneYearAgo, destinationsRepository, tripsRepository) {
 
+    const yearlyCost = domUpdates.calculateYearlyCost
+    (travelerID, today, oneYearAgo, destinationsRepository, tripsRepository);
 
-    
-    console.log('travelerYearlyTotal >>>>', travelerYearlyTotal);
+    requestForm.insertAdjacentHTML('afterend', 
+      `<article tabindex="0" class="cost-display">
+        <label for="traveler-detail__yearly-cost" class="label-text">
+          YOU'VE SPENT: </label>
+            <br>
+            <h2 class-"traveler-detail__yearly-cost" 
+            name="traveler-detail__yearly-cost">
+            $${yearlyCost}</h2>
+            <p class="traveler-detail__past-year">
+            ON TRIPS SINCE ${oneYearAgo}</p>
+        </article>
+      `);
+
+    console.log('travelerYearlyTotal >>>>', yearlyCost);
+
+  },
+
+  calculateYearlyCost
+  (travelerID, today, oneYearAgo, destinationsRepository, tripsRepository) {
+
+    const yearlyTripsTotal = tripsRepository.calculateYearlyTotal
+    (travelerID, today, oneYearAgo, destinationsRepository);
+  
+    console.log('yearlyTripsTotal >>>>', yearlyTripsTotal);
+
+    const commission = yearlyTripsTotal * .10;
+    const totalCost = (yearlyTripsTotal + commission).toFixed(2);
+    return totalCost;
 
   }
 

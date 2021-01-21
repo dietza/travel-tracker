@@ -59,27 +59,29 @@ const buildTravelerDash = () => {
       destinationsRepository = new DestinationsRepository(response[1]);
       tripsRepository = new TripsRepository(response[2]);
 
-      domUpdates.displayTrips(traveler, tripsRepository, destinationsRepository);
-      yearlyCost = getYearlyCost
-      (travelerID, today, oneYearAgo, destinationsRepository);
+      domUpdates.displayTrips
+      (traveler, tripsRepository, destinationsRepository);
+      // yearlyCost = getYearlyCost
+      // (travelerID, today, oneYearAgo, destinationsRepository);
       
-      domUpdates.displayYearlyCost(yearlyCost);
+      domUpdates.displayYearlyCost
+      (travelerID, today, oneYearAgo, destinationsRepository, tripsRepository);
     });
 }
 
 
-const getYearlyCost = 
-(travelerID, today, oneYearAgo, destinationsRepository) => {
-  const yearlyTripsTotal = tripsRepository.calculateYearlyTotal
-  (travelerID, today, oneYearAgo, destinationsRepository);
+// const getYearlyCost = 
+// (travelerID, today, oneYearAgo, destinationsRepository) => {
+//   const yearlyTripsTotal = tripsRepository.calculateYearlyTotal
+//   (travelerID, today, oneYearAgo, destinationsRepository);
 
-  console.log('yearlyTripsTotal >>>>', yearlyTripsTotal);
+//   console.log('yearlyTripsTotal >>>>', yearlyTripsTotal);
 
 
-  const commission = yearlyTripsTotal * .10;
-  const totalCost = (yearlyTripsTotal + commission).toFixed(2);
-  return totalCost;
-}
+//   const commission = yearlyTripsTotal * .10;
+//   const totalCost = (yearlyTripsTotal + commission).toFixed(2);
+//   return totalCost;
+// }
 
 
 window.addEventListener('load', buildTravelerDash())

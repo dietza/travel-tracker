@@ -40,7 +40,6 @@ const getRandomID = () => {
 let destinationsRepository;
 let tripsRepository;
 let traveler;
-// let yearlyCost;
 let newTrip;
 
 const today = moment().format('YYYY/MM/DD');

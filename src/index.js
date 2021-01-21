@@ -107,27 +107,22 @@ const getTripEstimate = (event) => {
   const tripEstimate = 
   destinationsRepository.calculateTripEstimate(tripInputs);
 
-  
   console.log('tripEstimate >>>>> ', tripEstimate);
 
- 
+  checkEstimate(tripInputs, tripEstimate);
 
-  domUpdates.displayEstimate
-  (tripEstimate, tripInputs, destinationsRepository);
-
-  // alert(tripEstimate);
-
-  // return tripEstimate;
 }
 
-// const checkEstimate = (tripEstimate) => {
-//   if (!tripEstimate instanceof 'number') {
-//     const errorMessage = tripEstimate;
-//     domUpdates.displayErrorMessage(errorMessage);
-//   } else {
-//     return tripEstimate;
-//   }
-// }
+const checkEstimate = (tripInputs, tripEstimate) => {
+  if (tripEstimate > 0) {
+    domUpdates.displayEstimate
+    (tripEstimate, tripInputs, destinationsRepository);
+    domUpdates.clearInputs();
+    domUpdates.clearErrors();
+  } else {
+    domUpdates.displayErrorMessage(tripEstimate);
+  }
+}
 
 
 

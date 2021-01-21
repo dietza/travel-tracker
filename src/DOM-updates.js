@@ -182,13 +182,13 @@ let domUpdates = {
 
     console.log('ERROR >> ', message);
 
-    errorMessageDisplay.innerHTML(
+    errorMessageDisplay.innerHTML =
       `<article tabindex="0" class="error-message">
           <label for="form__input-error" class="label-text">
             CHECK INPUTS!</label>
           <p class="form__input-error" name="form__input-error">
           ${message}</p>
-        </article>`);
+        </article>`;
 
   },
 
@@ -197,10 +197,10 @@ let domUpdates = {
   },
 
   clearInputs() {
-    dateInput.innerHTML = '';
-    durationInput.innerHTML = '';
-    numTravelersInput.innerHTML = '';
-    destinationInput.innerHTML = '';
+    dateInput.value = '';
+    durationInput.value = '';
+    numTravelersInput.value = '';
+    destinationInput.value = '';
   },
 
 }

@@ -10,7 +10,7 @@ export const destinationInput =
 document.querySelector(".form__destination-input");
 export const estimateButton = 
 document.querySelector('.form__estimate-trip-button');
-export const requestButton = 
+export const requestSubmitButton = 
 document.querySelector('.form__submit-request-button');
 export const yearlyCostDisplay = 
 document.querySelector(".traveler-detail__yearly-cost-display");
@@ -141,12 +141,9 @@ let domUpdates = {
   },
 
   displayEstimate(tripEstimate, tripInputs, destinationsRepo) {
-
     const destination = destinationsRepo.findByID(tripInputs.destinationID);
-    // const displayDate = domUpdates.reformatDate(tripInputs.date);
-
-    // yearlyCostDisplay.classList.add('.hidden');
-
+    const displayDate = (tripInputs.date).replaceAll("-", "/");
+    tripEstimateDisplay.innerHTML = '';
     tripEstimateDisplay.innerHTML = 
       `<article tabindex="0" class="trip-estimate-display">
         <img src=${destination.image}" 
@@ -161,7 +158,7 @@ let domUpdates = {
           TO VISIT </label>
           <h3 class-"trip-detail__destination">
           ${destination.destination}</h3>
-          <p class="trip-detail__date">START DATE: ${tripInputs.date}</p>
+          <p class="trip-detail__date">START DATE: ${displayDate}</p>
           <p class="trip-detail__travelers">
           NUMBER of TRAVELERS: ${tripInputs.travelers}</p>
           <p class="trip-detail__duration">
@@ -169,19 +166,15 @@ let domUpdates = {
           <p class="trip-detail__status">
           TRIP STATUS: ${tripInputs.status}</p>
           </section>
+
       </article>
     `;
-
+    
     console.log('destination >>>', destination);
 
   },
 
   displayErrorMessage(message) {
-
-    // alert(message);
-
-    console.log('ERROR >> ', message);
-
     errorMessageDisplay.innerHTML =
       `<article tabindex="0" class="error-message">
           <label for="form__input-error" class="label-text">
@@ -189,7 +182,28 @@ let domUpdates = {
           <p class="form__input-error" name="form__input-error">
           ${message}</p>
         </article>`;
+  },
 
+  buildNewTrip(tripInputs, tripsRepository) {
+
+    console.log('tripsRepo!!!!', tripsRepository['allTrips'].length + 1)
+    // const newID = tripsRepository['allTrips'].length + 1;
+
+    const requestedTrip = 
+    {
+      id: Date.now(),
+      userID: tripInputs.userID,
+      destinationID: tripInputs.destinationID,
+      travelers: tripInputs.travelers,
+      date: tripInputs.date.replaceAll("-", "/"),
+      duration: tripInputs.duration,
+      status: "pending",
+      suggestedActivities: []
+    };
+
+    console.log('requestedTrip', requestedTrip)
+
+    return requestedTrip;
   },
 
   clearErrors() {

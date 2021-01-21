@@ -10,7 +10,7 @@ import Traveler from './OOP/Traveler';
 import TripsRepository from './OOP/TripsRepository';
 import DestinationsRepository from './OOP/DestinationsRepository'
 
-import {fetchApi} from './Fetch-API';
+import fetchApi from './Fetch-API';
 import {
   domUpdates,
   main,
@@ -20,7 +20,7 @@ import {
   numTravelersInput,
   destinationInput,
   estimateButton,
-  requestButton,
+  requestSubmitButton,
   errorMessageDisplay,
   tripEstimateDisplay} from './DOM-updates';
 
@@ -47,7 +47,8 @@ const getRandomID = () => {
 let destinationsRepository;
 let tripsRepository;
 let traveler;
-let yearlyCost;
+// let yearlyCost;
+let newTrip;
 
 const today = moment().format('YYYY/MM/DD');
 const oneYearAgo = moment().subtract(366, 'days').format('YYYY/MM/DD');
@@ -75,7 +76,7 @@ Promise.all([
   });
 
 const buildTravelerDashboard = () => {
-  // domUpdates.clearErrors();
+  domUpdates.clearErrors();
   
   domUpdates.displayTrips
   (traveler, tripsRepository, destinationsRepository);
@@ -89,7 +90,7 @@ const buildTravelerDashboard = () => {
 
 const setEventListeners = () => {
   estimateButton.addEventListener('click', getTripEstimate);
-// requestButton.addEventListener('click', );
+  requestSubmitButton.addEventListener('click', submitTripRequest);
 }
 
 
@@ -110,7 +111,6 @@ const getTripEstimate = (event) => {
   console.log('tripEstimate >>>>> ', tripEstimate);
 
   checkEstimate(tripInputs, tripEstimate);
-
 }
 
 const checkEstimate = (tripInputs, tripEstimate) => {
@@ -119,9 +119,24 @@ const checkEstimate = (tripInputs, tripEstimate) => {
     (tripEstimate, tripInputs, destinationsRepository);
     domUpdates.clearInputs();
     domUpdates.clearErrors();
+    newTrip = domUpdates.buildNewTrip(tripInputs, tripsRepository);
   } else {
     domUpdates.displayErrorMessage(tripEstimate);
   }
+}
+
+const submitTripRequest = (event) => {
+  event.preventDefault()
+  
+
+  // Promise.resolve(fetchApi.postNewTrip(newTrip))
+  //   .then(response => response.json())
+  //   .then(data => console.log('DATA!!!!!!!', data))
+  //   .catch(err => console.log(err));
+  // // console.log('1OUT POST >>>', newTrip);
+  const result = fetchApi.postNewTrip(newTrip);
+  console.log('2OUT POST >>>', result);
+
 }
 
 

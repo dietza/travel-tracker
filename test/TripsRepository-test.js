@@ -264,10 +264,6 @@ describe('TripsRepository', () => {
     expect(yearlyTotalCost3).to.equal(15095);
     expect(yearlyTotalCost35).to.equal(16750);
     expect(yearlyTotalCost25).to.equal(0);
-
-
-    let date = new Date([10, 31, 2020]).toLocaleDateString("en-US");
-    console.log('REFORMAT >>>', date);
   })
 
 })

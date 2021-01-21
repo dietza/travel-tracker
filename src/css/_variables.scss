@@ -22,7 +22,7 @@ $seafoam:	#19d3ca;
 };
 
 @mixin primary-background() {
-  background: linear-gradient(to top, rgba(81, 117, 115, 0.75), rgba(0, 0, 0, 0.5)), url(https://www.nasa.gov/sites/default/files/thumbnails/image/iss061e098033_lrg.jpg);
+  background: linear-gradient(to bottom, rgba(81, 117, 115, 0.75), rgba(0, 0, 0, 0.5)), url(https://www.nasa.gov/sites/default/files/thumbnails/image/iss061e098033_lrg.jpg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

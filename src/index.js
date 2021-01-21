@@ -19,7 +19,7 @@ import {
   durationInput,
   numTravelersInput,
   destinationInput,
-  quoteButton,
+  estimateButton,
   requestButton,
   tripEstimateDisplay} from './DOM-updates';
 
@@ -58,30 +58,59 @@ const fetchedTripsData = fetchApi.fetchTripsData();
 
 // DASH LOAD
 
+Promise.all([
+  fetchedTravelerData,
+  fetchedDestinationsData,
+  fetchedTripsData
+])
+  .then(response => {
+    traveler = new Traveler(response[0]);
+    destinationsRepository = new DestinationsRepository(response[1]);
+    tripsRepository = new TripsRepository(response[2]);
+  })
+  .then( () => {
+    buildTravelerDashboard();
+    setEventListeners();
+  });
+
 const buildTravelerDashboard = () => {
-  Promise.all([
-    fetchedTravelerData,
-    fetchedDestinationsData,
-    fetchedTripsData
-  ])
-    .then(response => {
-      traveler = new Traveler(response[0]);
-      destinationsRepository = new DestinationsRepository(response[1]);
-      tripsRepository = new TripsRepository(response[2]);
+  domUpdates.displayTrips
+  (traveler, tripsRepository, destinationsRepository);
+  
+  domUpdates.displayYearlyCost
+  (travelerID, today, oneYearAgo, destinationsRepository, tripsRepository);
 
-      domUpdates.displayTrips
-      (traveler, tripsRepository, destinationsRepository);
-      
-      domUpdates.displayYearlyCost
-      (travelerID, today, oneYearAgo, destinationsRepository, tripsRepository);
+  domUpdates.populateDestinationOptions(destinationsRepository);
+};
 
-      domUpdates.populateDestinationOptions(destinationsRepository);
-    });
+
+const setEventListeners = () => {
+  estimateButton.addEventListener('click', getTripEstimate);
+// requestButton.addEventListener('click', );
 }
 
-const getTripEstimate = 
 
-window.addEventListener('load', buildTravelerDashboard());
-// estimateButton.addEventListener('click', );
+const getTripEstimate = () => {
+  const tripInputs = 
+  {
+    userID: travelerID,
+    destinationID: destinationsRepository.findByName(destinationInput.value).id,
+    travelers: numTravelersInput.value,
+    date: dateInput.value,
+    duration: durationInput.value,
+    status: 'pending',
+  };
+  const tripEstimate = 
+  destinationsRepository.calculateTripEstimate(tripInputs);
+  console.log('tripEstimate >>>>> ', tripEstimate);
+  alert(tripEstimate);
+
+  // return tripEstimate;
+}
+
+
+
+// window.addEventListener('load', buildTravelerDashboard());
+// estimateButton.addEventListener('click', getTripEstimate());
 // requestButton.addEventListener('click', );
 

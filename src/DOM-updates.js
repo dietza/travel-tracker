@@ -64,7 +64,6 @@ let domUpdates = {
 
   displayYearlyCost
   (travelerID, today, oneYearAgo, destinationsRepository, tripsRepository) {
-
     const yearlyCost = domUpdates.calculateYearlyCost
     (travelerID, today, oneYearAgo, destinationsRepository, tripsRepository);
 
@@ -74,7 +73,6 @@ let domUpdates = {
       `<article tabindex="0" class="cost-display">
         <label for="traveler-detail__yearly-cost" class="label-text">
           YOU'VE SPENT: </label>
-            <br>
             <h2 class-"traveler-detail__yearly-cost" 
             name="traveler-detail__yearly-cost">
             $${yearlyCost}</h2>
@@ -82,7 +80,6 @@ let domUpdates = {
             ON TRIPS SINCE ${displayDate}</p>
         </article>
       `);
-
   },
 
   reformatDate(rawDate) {
@@ -107,7 +104,6 @@ let domUpdates = {
   },
 
   populateDestinationOptions(destinationsRepo) {
-
     const sortedDestinations = 
     domUpdates.sortDestinationsList(destinationsRepo);
 
